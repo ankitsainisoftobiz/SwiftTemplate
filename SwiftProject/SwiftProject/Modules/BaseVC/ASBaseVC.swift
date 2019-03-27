@@ -52,7 +52,7 @@ class ASBaseVC: UIViewController {
         
         btnRightMenu.frame = CGRect.init(x: 0, y: 0, width: 40, height: 30)
         btnRightMenu.addTarget(self, action: #selector(navRightClicked(sender:)), for: .touchUpInside)
-        btnRightMenu.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        btnRightMenu.titleLabel?.font = Font.navButton.val
         if right != nil {
             btnRightMenu.setImage(right, for: .normal)
         }

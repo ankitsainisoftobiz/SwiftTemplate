@@ -14,9 +14,10 @@ let kAppDelegate = (UIApplication.shared.delegate as! AppDelegate)
 let kMainQueue = DispatchQueue.main
 
 //MARK:- API
+///Extented further in EnumUtil.swift class
 /// This enum represent All the APi urls used in the app
 enum API: String {
-    static let baseURL = "http://www.example.org"
+    static let baseURL = "http://192.168.0.121:2222"//"http://www.example.org"
     
     case login = "/workflow/running/"
     case polling = ""
@@ -27,11 +28,42 @@ enum API: String {
 /// let storyboard = Storyboard.main.instance
 /// let objVC = Storyboard.main.instance.instantiateViewController(withIdentifier: ViewController.storyboardID)
 /// let objVC1 = Storyboard.main.viewController(viewControllerClass: ViewController.self)
+///Extented further in EnumUtil.swift class
 enum Storyboard: String {
     case main = "Main"
 }
 
+//MARK:- Background Queues
+///QUEUES
+enum BackgroundQueue {
+    static let loginQueue = DispatchQueue(label: "com.app.queue_SignIn", attributes: .concurrent)
+    static let polingQueue = DispatchQueue(label: "com.app.queue_poling", qos: .background)
+}
+
+//MARK:- [  FONTS   ]
+///Extented further in EnumUtil.swift class
+enum Font {
+    case navTitle
+    case navButton
+    case textField
+    case formButtons
+    
+    var info: (size: CGFloat, weight: UIFont.Weight) {
+        switch self {
+        case .navTitle:
+            return (14.0, .regular)
+        case .navButton:
+            return (14.0, .regular)
+        case .textField:
+            return (14.0, .regular)
+        case .formButtons:
+            return (16.0, .semibold)
+        }
+    }
+}
+
 //MARK:- Device Constraints
+///Extented further in EnumUtil.swift class
 enum Screen {}
 
 //MARK:- Default Center
@@ -46,25 +78,7 @@ enum Keys {
     static let userData = "userData"
 }
 
-//MARK:- Background Queues
-///QUEUES
-enum BackgroundQueue {
-    static let loginQueue = DispatchQueue(label: "com.app.queue_SignIn", attributes: .concurrent)
-    static let polingQueue = DispatchQueue(label: "com.app.queue_poling", qos: .background)
-}
-
-//MARK:- [  FONTS   ]
-enum Font {
-    case navTitle
-    case formButtons
-    
-    var info: (size: CGFloat, weight: UIFont.Weight) {
-        switch self {
-        case .navTitle:
-            return (14.0, .regular)
-        case .formButtons:
-            return (16.0, .semibold)
-        }
-    }
-}
+//MARK:- HTTP METHODS
+///Extented further in EnumUtil.swift class
+enum HttpMethods {}
 

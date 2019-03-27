@@ -83,8 +83,8 @@ class FormTextField: SkyFloatingLabelTextField, UITextFieldDelegate {
         self.errorMessage = error
         self.autocorrectionType = .no
         self.keyboardType = .emailAddress
-        self.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        self.placeholderFont = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        self.font = Font.textField.val
+        self.placeholderFont = Font.textField.val
         self.returnKeyType = returnKey
         self.delegate = self
         self.textFieldAction = actionType

@@ -68,7 +68,7 @@ enum VCIdentifier {
 //MARK:
 //MARK:        [---------- STORYBOARD SETTINGS [END] ----------]
 //MARK:-
-enum HttpMethods {
+extension HttpMethods {
     static let get = "GET"
     static let post = "POST"
 }
