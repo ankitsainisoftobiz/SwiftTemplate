@@ -54,16 +54,17 @@ enum BackgroundQueue {
 }
 
 //MARK:- [  FONTS   ]
-enum Font: CGFloat {
-    case navTitle = 14.0
-    case formButtons = 16.0
+enum Font {
+    case navTitle
+    case formButtons
     
-    var weight: UIFont.Weight {
+    var info: (size: CGFloat, weight: UIFont.Weight) {
         switch self {
         case .navTitle:
-            return .regular
+            return (14.0, .regular)
         case .formButtons:
-            return .semibold
+            return (16.0, .semibold)
         }
     }
 }
+
