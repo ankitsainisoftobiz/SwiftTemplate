@@ -9,7 +9,34 @@
 import Foundation
 import UIKit
 
+//
+//MARK:-        [---------- API Extends ----------]
+//
+extension API {
+    var val: String {
+        return self.rawValue
+    }
+    
+    func url(with mainURL: String = API.baseURL) -> URL? {
+        let url = "\(mainURL)\(self.val)"
+        return URL.init(string: url)
+    }
+    
+    func strUrl(with mainURL: String = API.baseURL) -> String {
+        return "\(mainURL)\(self.val)"
+    }
+}
 
+//MARK:- Device Constraints
+extension Screen {
+    static let main = UIScreen.main
+    static let width = UIScreen.main.bounds.size.width
+    static let height = UIScreen.main.bounds.size.height
+    static let centerW = Screen.width/2
+    static let centerH = Screen.height/2
+    static let deviceIdiom = main.traitCollection.userInterfaceIdiom
+    static let isIPAD: Bool = deviceIdiom == UIUserInterfaceIdiom.pad ? true : false
+}
 
 //
 //MARK:-        [---------- STORYBOARD SETTINGS [START] ----------]
@@ -62,18 +89,16 @@ enum Notifications: String {
 }
 
 //MARK:- [  FONTS   ]
-enum FontSigns: String {
-    case kFontAladin = "Aladin-Regular"
-    case kFontBerkshireSwash = "BerkshireSwash-Regular"
-    case kFontEagleLake = "EagleLake-Regular"
-    case kFontGreatVibes = "GreatVibes-Regular"
-    case kFontPetitFormalScript = "PetitFormalScript-Regular"
-    case kFontSriracha = "Sriracha-Regular"
+extension Font {
+    var val: UIFont {
+        return UIFont.systemFont(ofSize: self.rawValue, weight: self.weight)
+    }
     
-    var name: String {
-        return self.rawValue
+    func val(of weight: UIFont.Weight) -> UIFont {
+        return UIFont.systemFont(ofSize: self.rawValue, weight: weight)
     }
 }
+
 
 //
 //MARK:- Media Extensions

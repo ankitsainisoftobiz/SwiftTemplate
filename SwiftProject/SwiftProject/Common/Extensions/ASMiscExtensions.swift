@@ -9,16 +9,6 @@
 import Foundation
 import UIKit
 
-extension UIFont {
-    
-    convenience init(family: FontSigns, size: CGFloat) {
-        self.init(name: family.name, size: size)!
-    }
-    
-}
-
-
-
 //MARK:- NSObject
 //MARK:
 extension NSObject {

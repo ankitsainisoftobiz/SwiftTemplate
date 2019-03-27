@@ -30,7 +30,7 @@ class ASBaseVC: UIViewController {
     ///   - withTitle: Bar Title
     ///   - font: Font
     ///   - color: Text Color
-    func navBar(withTitle: String, font: UIFont = UIFont.systemFont(ofSize: 14.0, weight: .semibold), color: UIColor = .white) {
+    func navBar(withTitle: String, font: UIFont = Font.navTitle.val, color: UIColor = .white) {
         self.navigationItem.title = withTitle
         self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color]
     }

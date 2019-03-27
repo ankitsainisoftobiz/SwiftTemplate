@@ -20,20 +20,6 @@ enum API: String {
     
     case login = "/workflow/running/"
     case polling = ""
-    
-    
-    var val: String {
-        return self.rawValue
-    }
-    
-    func url(with mainURL: String = API.baseURL) -> URL? {
-        let url = "\(mainURL)\(self.val)"
-        return URL.init(string: url)
-    }
-    
-    func strUrl(with mainURL: String = API.baseURL) -> String {
-        return "\(mainURL)\(self.val)"
-    }
 }
 
 //MARK:- Storyboard
@@ -45,17 +31,8 @@ enum Storyboard: String {
     case main = "Main"
 }
 
-
 //MARK:- Device Constraints
-enum Screen {
-    static let main = UIScreen.main
-    static let width = UIScreen.main.bounds.size.width
-    static let height = UIScreen.main.bounds.size.height
-    static let centerW = Screen.width/2
-    static let centerH = Screen.height/2
-    static let deviceIdiom = main.traitCollection.userInterfaceIdiom
-    static let isIPAD: Bool = deviceIdiom == UIUserInterfaceIdiom.pad ? true : false
-}
+enum Screen {}
 
 //MARK:- Default Center
 ///Abbr...
@@ -74,4 +51,19 @@ enum Keys {
 enum BackgroundQueue {
     static let loginQueue = DispatchQueue(label: "com.app.queue_SignIn", attributes: .concurrent)
     static let polingQueue = DispatchQueue(label: "com.app.queue_poling", qos: .background)
+}
+
+//MARK:- [  FONTS   ]
+enum Font: CGFloat {
+    case navTitle = 14.0
+    case formButtons = 16.0
+    
+    var weight: UIFont.Weight {
+        switch self {
+        case .navTitle:
+            return .regular
+        case .formButtons:
+            return .semibold
+        }
+    }
 }
