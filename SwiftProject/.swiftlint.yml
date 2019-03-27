@@ -1,0 +1,62 @@
+disabled_rules: # rule identifiers to exclude from running
+- trailing_whitespace
+- line_length
+- trailing_newline
+- mark
+- large_tuple
+- comma
+- syntactic_sugar
+- function_body_length
+- cyclomatic_complexity
+- file_length
+- shorthand_operator
+
+#- trailing_semicolon
+#- colon
+#- control_statement
+#- redundant_void_return
+#- opening_brace
+#- force_cast
+#- type_body_length
+
+#- unused_optional_binding
+#- class_delegate_protocol
+#- empty_count
+#- redundant_discardable_let
+#- function_parameter_count
+#- legacy_constructor
+#- redundant_string_enum_value
+#- unused_enumerated
+#- redundant_string_enum_value
+#- statement_position
+#- vertical_whitespace
+#- unused_closure_parameter
+
+
+opt_in_rules: # some rules are only opt-in
+- empty_count
+- empty_string
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+- Pods
+- SwiftProject/Resources/Assets
+- SwiftProject/Extensions
+- SwiftProject/Libraries
+- SwiftProject/Common/Extensions/UserDefaults/SwiftyUserDefaults.swift
+
+# Overrided rules >>>.
+empty_count: warning
+empty_string: warning
+
+vertical_whitespace:
+max_empty_lines: 5
+
+identifier_name:
+#validates_start_with_lowercase: false
+min_length:
+warning: 1
+error: 1
+#allowed_symbols: ["_"]
+
+reporter: "xcode"
+

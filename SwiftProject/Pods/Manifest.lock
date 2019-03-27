@@ -1,0 +1,32 @@
+PODS:
+  - IQKeyboardManagerSwift (6.2.0)
+  - ReachabilitySwift (4.3.0)
+  - SkyFloatingLabelTextField (3.6.0)
+  - SVProgressHUD (2.2.5)
+  - SwiftLint (0.31.0)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - ReachabilitySwift
+  - SkyFloatingLabelTextField
+  - SVProgressHUD
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - IQKeyboardManagerSwift
+    - ReachabilitySwift
+    - SkyFloatingLabelTextField
+    - SVProgressHUD
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+
+PODFILE CHECKSUM: 4cd842ba065a76c3078105df79d7f6ad35d50bec
+
+COCOAPODS: 1.5.3
