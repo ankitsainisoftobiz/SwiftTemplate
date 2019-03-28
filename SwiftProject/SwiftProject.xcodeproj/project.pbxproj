@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A24CDD0224CD24400F2FF83 /* TestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A24CDCF224CD24400F2FF83 /* TestModal.swift */; };
 		1AA9D30C224B93CF002D2E02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA9D2D5224B93CF002D2E02 /* LaunchScreen.storyboard */; };
 		1AA9D30D224B93CF002D2E02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA9D2D7224B93CF002D2E02 /* Main.storyboard */; };
 		1AA9D30E224B93CF002D2E02 /* ASBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9D2DA224B93CF002D2E02 /* ASBaseVC.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		187BDD9134492D1BB2F8C9A0 /* Pods-SwiftProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftProject/Pods-SwiftProject.debug.xcconfig"; sourceTree = "<group>"; };
+		1A24CDCF224CD24400F2FF83 /* TestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModal.swift; sourceTree = "<group>"; };
 		1AA9D2BF224B92D5002D2E02 /* SwiftProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA9D2CE224B92E9002D2E02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AA9D2D6224B93CF002D2E02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				1AA9D2DF224B93CF002D2E02 /* UserLogin.swift */,
+				1A24CDCF224CD24400F2FF83 /* TestModal.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				1AA9D317224B93CF002D2E02 /* ASArrayExtensions.swift in Sources */,
 				1AA9D31C224B93CF002D2E02 /* ASColors.swift in Sources */,
 				1AA9D31F224B93CF002D2E02 /* SwiftyUserDefaults.swift in Sources */,
+				1A24CDD0224CD24400F2FF83 /* TestModal.swift in Sources */,
 				1AA9D322224B93CF002D2E02 /* ASTextField.swift in Sources */,
 				1AA9D327224B93CF002D2E02 /* AppDelegateExt.swift in Sources */,
 				1AA9D325224B93CF002D2E02 /* EnumUtils.swift in Sources */,

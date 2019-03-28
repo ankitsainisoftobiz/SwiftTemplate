@@ -45,6 +45,32 @@ class ViewController: ASBaseVC {
         
         ///5
         //startObserverPoll()
+        
+        ///6
+        let dict: Dictionary<String, Any> = [
+            "job_information": [
+                "title": "iOS Developer",
+                "salary": NSNull()
+            ],
+            "firstname": "John",
+            "lastname": "Doe",
+            "age": 20
+        ]
+        Login.shared.save(user: dict.toData())
+        if Login.shared.isUserLogin() == true {
+            print("<<<<<<<<<<<<<<<<<<<")
+            print(Login.shared.user?.firstName ?? "")
+            print(Login.shared.user?.job?.title ?? "")
+            if var person = Login.shared.user {
+                person.firstName = "XYZ"
+                person.job = nil
+                Login.shared.update(user: person)
+                print(">>>>>>>>>>>>>>>>>>>")
+                print(Login.shared.user?.firstName ?? "")
+                print(Login.shared.user?.job?.title ?? "nil")
+            }
+            
+        }
     }
     
     deinit {

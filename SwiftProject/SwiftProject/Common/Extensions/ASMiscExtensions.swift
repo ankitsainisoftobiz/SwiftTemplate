@@ -384,6 +384,17 @@ extension Dictionary {
         return ""
     }
     
+    func toData() -> Data {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            // here "jsonData" is the dictionary encoded in JSON data
+            return jsonData
+        } catch {
+            print(error.localizedDescription)
+            return Data()
+        }
+    }
+    
     func getStringVal(name: String) -> String {
         
         guard let dict = self as? Dictionary<String, Any> else { return "" }
