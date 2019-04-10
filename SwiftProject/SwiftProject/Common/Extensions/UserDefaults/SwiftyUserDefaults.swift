@@ -119,13 +119,13 @@ public extension UserDefaults {
     
     /// Returns getter proxy for `key`
     
-    public subscript(key: String) -> Proxy {
+    subscript(key: String) -> Proxy {
         return Proxy(self, key)
     }
     
     /// Sets value for `key`
     
-    public subscript(key: String) -> Any? {
+    subscript(key: String) -> Any? {
         get {
             // return untyped Proxy
             // (make sure we don't fall into infinite loop)
@@ -153,13 +153,13 @@ public extension UserDefaults {
     
     /// Returns `true` if `key` exists
     
-    public func hasKey(_ key: String) -> Bool {
+    func hasKey(_ key: String) -> Bool {
         return object(forKey: key) != nil
     }
     
     /// Removes value for `key`
     
-    public func remove(_ key: String) {
+    func remove(_ key: String) {
         removeObject(forKey: key)
     }
     
@@ -168,7 +168,7 @@ public extension UserDefaults {
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
     
-    public func removeAll() {
+    func removeAll() {
         for (key, _) in dictionaryRepresentation() {
             removeObject(forKey: key)
         }
@@ -473,7 +473,7 @@ infix operator ?= : AssignmentPrecedence
 /// - Note: This isn't the same as `Defaults.registerDefaults`. This method saves the new value to disk, whereas `registerDefaults` only modifies the defaults in memory.
 /// - Note: If key already exists, the expression after ?= isn't evaluated
 
-@available(*, deprecated:1, message:"Please migrate to static keys and use this gist: https://gist.github.com/radex/68de9340b0da61d43e60")
+@available(*, deprecated, message:"Please migrate to static keys and use this gist: https://gist.github.com/radex/68de9340b0da61d43e60")
 public func ?= (proxy: UserDefaults.Proxy, expr: @autoclosure() -> Any) {
     if !proxy.defaults.hasKey(proxy.key) {
         proxy.defaults[proxy.key] = expr()
@@ -483,13 +483,13 @@ public func ?= (proxy: UserDefaults.Proxy, expr: @autoclosure() -> Any) {
 /// Adds `b` to the key (and saves it as an integer)
 /// If key doesn't exist or isn't a number, sets value to `b`
 
-@available(*, deprecated:1, message:"Please migrate to static keys to use this.")
+@available(*, deprecated, message:"Please migrate to static keys to use this.")
 public func += (proxy: UserDefaults.Proxy, b: Int) {
     let a = proxy.defaults[proxy.key].intValue
     proxy.defaults[proxy.key] = a + b
 }
 
-@available(*, deprecated:1, message:"Please migrate to static keys to use this.")
+@available(*, deprecated, message:"Please migrate to static keys to use this.")
 public func += (proxy: UserDefaults.Proxy, b: Double) {
     let a = proxy.defaults[proxy.key].doubleValue
     proxy.defaults[proxy.key] = a + b
@@ -498,7 +498,7 @@ public func += (proxy: UserDefaults.Proxy, b: Double) {
 /// Icrements key by one (and saves it as an integer)
 /// If key doesn't exist or isn't a number, sets value to 1
 
-@available(*, deprecated:1, message:"Please migrate to static keys to use this.")
+@available(*, deprecated, message:"Please migrate to static keys to use this.")
 public postfix func ++ (proxy: UserDefaults.Proxy) {
     proxy += 1
 }

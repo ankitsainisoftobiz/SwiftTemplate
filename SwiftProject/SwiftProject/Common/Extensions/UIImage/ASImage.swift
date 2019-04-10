@@ -390,6 +390,8 @@ extension UIImage {
             transform = transform.rotated(by: CGFloat.pi / -2.0)
         case .up, .upMirrored:
             break
+        @unknown default:
+            break
         }
         
         //Flip image one more time if needed to, this is to prevent flipped image
@@ -401,6 +403,8 @@ extension UIImage {
             transform.translatedBy(x: size.height, y: 0)
             transform.scaledBy(x: -1, y: 1)
         case .up, .down, .left, .right:
+            break
+        @unknown default:
             break
         }
         

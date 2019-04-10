@@ -49,7 +49,7 @@ extension UIColor {
         let arrColors: [UIColor] = [.circleOne, .circleTwo, .circleThree, .circleFour]
         let arrAlpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
         
-        let position = arrAlpha.index(of: char.uppercased())
+        let position = arrAlpha.firstIndex(of: char.uppercased())
         if position != nil {
             let reminder = position! % arrColors.count
             if arrColors.count  > reminder {

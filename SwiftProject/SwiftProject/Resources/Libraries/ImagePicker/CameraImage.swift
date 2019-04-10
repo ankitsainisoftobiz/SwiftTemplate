@@ -51,6 +51,8 @@ class CameraImage: NSObject {
             openSettings()
         case .notDetermined:
             return false
+        @unknown default:
+            break
         }
         return true
     }
@@ -209,6 +211,8 @@ extension UIImagePickerController.SourceType {
         case .savedPhotosAlbum:
             return L10n.savedPhotoAlbum.string
             
+        @unknown default:
+            return ""
         }
     }
 }
