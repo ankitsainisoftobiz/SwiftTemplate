@@ -13,15 +13,25 @@ import UIKit
 //MARK:-        [---------- API Extends ----------]
 //
 extension API {
+    
+    /// String value of url
     var val: String {
         return self.rawValue
     }
     
+    /// URL with base url
+    ///
+    /// - Parameter mainURL: base url string
+    /// - Returns: URL created using base url passed.
     func url(with mainURL: String = API.baseURL) -> URL? {
         let url = "\(mainURL)\(self.val)"
         return URL.init(string: url)
     }
     
+    /// String value with base url
+    ///
+    /// - Parameter mainURL: base url
+    /// - Returns: base url + url into string form.
     func strUrl(with mainURL: String = API.baseURL) -> String {
         return "\(mainURL)\(self.val)"
     }
@@ -42,6 +52,8 @@ extension Screen {
 //MARK:-        [---------- STORYBOARD SETTINGS [START] ----------]
 //
 extension Storyboard {
+    
+    /// UIStoryboard instance
     var instance: UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
     }
@@ -55,15 +67,19 @@ extension Storyboard {
         return instance.instantiateViewController(withIdentifier: storyboardID) as? T
     }
 }
-
+//MARK:- UIViewController
 extension UIViewController {
+    
+    /// String identifier of storyboard
     class var storyboardID: String {
         return "\(self)"
     }
 }
 
+/// ViewController Identifier
 enum VCIdentifier {
-    static let mainSignIn = "ASSignInVC"
+    static let mainSignIn = "TDLoginVC"
+    static let welcomeVC = "TDWelcomeVC"
 }
 //MARK:
 //MARK:        [---------- STORYBOARD SETTINGS [END] ----------]
@@ -71,6 +87,13 @@ enum VCIdentifier {
 extension HttpMethods {
     static let get = "GET"
     static let post = "POST"
+}
+
+// MARK: - ContentType
+extension ContentType {
+    static let applicationXWWFormUrlencoded = "application/x-www-form-urlencoded"
+    static let applicationJson = "application/json"
+    static let multipartFormData = "multipart/form-data"
 }
 
 ///

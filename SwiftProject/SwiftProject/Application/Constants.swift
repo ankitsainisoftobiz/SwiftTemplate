@@ -17,9 +17,9 @@ let kMainQueue = DispatchQueue.main
 ///Extented further in EnumUtil.swift class
 /// This enum represent All the APi urls used in the app
 enum API: String {
-    static let baseURL = "http://192.168.0.121:2222"//"http://www.example.org"
+    static let baseURL = "http://www.example.org"
     
-    case login = "/workflow/running/"
+    case login = "/login"
     case polling = ""
 }
 
@@ -31,6 +31,8 @@ enum API: String {
 ///Extented further in EnumUtil.swift class
 enum Storyboard: String {
     case main = "Main"
+    case chat = "Chat"
+    case group = "Group"
 }
 
 //MARK:- Background Queues
@@ -82,3 +84,5 @@ enum Keys {
 ///Extented further in EnumUtil.swift class
 enum HttpMethods {}
 
+/// Extented further in EnumUtil.swift class
+enum ContentType {}

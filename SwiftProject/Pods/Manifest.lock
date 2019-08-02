@@ -1,32 +1,46 @@
 PODS:
+  - GrowingTextView (0.7.0)
   - IQKeyboardManagerSwift (6.2.0)
   - ReachabilitySwift (4.3.0)
+  - SDWebImage (5.0.6):
+    - SDWebImage/Core (= 5.0.6)
+  - SDWebImage/Core (5.0.6)
+  - SKPhotoBrowser (6.1.0)
   - SkyFloatingLabelTextField (3.6.0)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.31.0)
 
 DEPENDENCIES:
+  - GrowingTextView (~> 0.5)
   - IQKeyboardManagerSwift
   - ReachabilitySwift
+  - SDWebImage
+  - SKPhotoBrowser
   - SkyFloatingLabelTextField
   - SVProgressHUD
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - GrowingTextView
     - IQKeyboardManagerSwift
     - ReachabilitySwift
+    - SDWebImage
+    - SKPhotoBrowser
     - SkyFloatingLabelTextField
     - SVProgressHUD
     - SwiftLint
 
 SPEC CHECKSUMS:
+  GrowingTextView: b946b0d1c33e0953725b9695d14f144cc35b2031
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: 4cd842ba065a76c3078105df79d7f6ad35d50bec
+PODFILE CHECKSUM: d0a58922fc1dba7bcf657cafda5691e7904aa33e
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.5

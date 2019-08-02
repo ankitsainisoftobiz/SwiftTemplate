@@ -157,10 +157,12 @@ extension CameraImage: UIImagePickerControllerDelegate, UINavigationControllerDe
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         guard let callBack = complete else {
             fromVC?.dismiss(animated: true, completion: nil)
+            releaseMemory()
             return
         }
         callBack(nil, nil)
         fromVC?.dismiss(animated: true, completion: nil)
+        releaseMemory()
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
@@ -175,6 +177,7 @@ extension CameraImage: UIImagePickerControllerDelegate, UINavigationControllerDe
         //Get file by checking its file type
         guard let mediaType = info[.mediaType] as? String else {
             fromVC?.dismiss(animated: true, completion: nil)
+            releaseMemory()
             return
             
         }
@@ -194,6 +197,14 @@ extension CameraImage: UIImagePickerControllerDelegate, UINavigationControllerDe
             }
         }
         fromVC?.dismiss(animated: true, completion: nil)
+        releaseMemory()
+    }
+    
+    /// Release parent controllers and memory
+    func releaseMemory() {
+        autoreleasepool(invoking: {
+            fromVC = nil
+        })
     }
 }
 

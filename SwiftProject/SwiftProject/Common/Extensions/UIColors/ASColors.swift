@@ -13,6 +13,7 @@ extension UIColor {
     static let skyBlue = UIColor.init(hexString: "#0189EF")
     static let lightBlack = UIColor.init(hexString: "#333333")
     static let fbColor = UIColor.init(hexString: "#0d4c92")
+    static let chatSection = UIColor.init(hexString: "#CEEAFD")
     static let linkedinColor = UIColor.init(hexString: "#0172b1")
     static let placeholderColor = UIColor.init(hexString: "#9dacbc")
     static let lightGrayColor = UIColor.init(hexString: "#F2F2F2")

@@ -87,6 +87,9 @@ class ViewController: ASBaseVC {
             timer = nil
         }
         
+        
+        guard let vc = Storyboard.chat.viewController(viewControllerClass: CBMessageListVC.self) else {return}
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK:- Lazy Initializers

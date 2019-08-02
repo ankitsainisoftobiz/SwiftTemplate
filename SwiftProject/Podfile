@@ -25,19 +25,23 @@ pod 'ReachabilitySwift'
 # floating lables in textfield
 pod 'SkyFloatingLabelTextField'
 
+# photo viewer
+pod 'SKPhotoBrowser'
+
+# lazy loading of images
+pod 'SDWebImage'
+
+pod 'GrowingTextView', '~> 0.5'
+
 #---------------------------------------------
 # SideMenu
 #pod 'SlideMenuControllerSwift'
 
-# lazy loading of images
-#pod 'SDWebImage'
 
 # amazon S3 bucket
 #pod 'AWSS3'
 #pod 'AWSS3', '~> 2.6.13'            # For file transfers
 
-# photo viewer
-#pod 'SKPhotoBrowser'
 
 # MultipleimagePicker
 #pod 'OpalImagePicker'
