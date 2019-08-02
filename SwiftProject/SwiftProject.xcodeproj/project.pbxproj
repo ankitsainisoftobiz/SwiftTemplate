@@ -61,6 +61,8 @@
 		669DC88B22F46E9800794E0E /* CBSelectedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DC88822F46E9800794E0E /* CBSelectedUserView.swift */; };
 		669DC88C22F46E9800794E0E /* CBSelectedUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 669DC88922F46E9800794E0E /* CBSelectedUserView.xib */; };
 		669DC88E22F4709300794E0E /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669DC88D22F4709300794E0E /* Chat.storyboard */; };
+		669DC89222F4772000794E0E /* ASS3Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DC89022F4772000794E0E /* ASS3Upload.swift */; };
+		669DC89322F4772000794E0E /* AWSModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DC89122F4772000794E0E /* AWSModal.swift */; };
 		70C9F2782988630EC23E6962 /* Pods_SwiftProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B01481C5DB6B189B2B6164 /* Pods_SwiftProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,8 @@
 		669DC88822F46E9800794E0E /* CBSelectedUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBSelectedUserView.swift; sourceTree = "<group>"; };
 		669DC88922F46E9800794E0E /* CBSelectedUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBSelectedUserView.xib; sourceTree = "<group>"; };
 		669DC88D22F4709300794E0E /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		669DC89022F4772000794E0E /* ASS3Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASS3Upload.swift; sourceTree = "<group>"; };
+		669DC89122F4772000794E0E /* AWSModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSModal.swift; sourceTree = "<group>"; };
 		76B01481C5DB6B189B2B6164 /* Pods_SwiftProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -187,6 +191,7 @@
 				1AA9D2DB224B93CF002D2E02 /* SignIn_Up */,
 				669DC85B22F46A5000794E0E /* Chat */,
 				669DC87A22F46D6B00794E0E /* Group */,
+				669DC88F22F4772000794E0E /* AWS */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -491,6 +496,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		669DC88F22F4772000794E0E /* AWS */ = {
+			isa = PBXGroup;
+			children = (
+				669DC89022F4772000794E0E /* ASS3Upload.swift */,
+				669DC89122F4772000794E0E /* AWSModal.swift */,
+			);
+			path = AWS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -649,7 +663,9 @@
 				1AA9D31E224B93CF002D2E02 /* ASViewExtensions.swift in Sources */,
 				1AA9D31B224B93CF002D2E02 /* ASFileManager.swift in Sources */,
 				1AA9D315224B93CF002D2E02 /* LocalizedStrings.swift in Sources */,
+				669DC89322F4772000794E0E /* AWSModal.swift in Sources */,
 				1AA9D323224B93CF002D2E02 /* ASView.swift in Sources */,
+				669DC89222F4772000794E0E /* ASS3Upload.swift in Sources */,
 				1AA9D321224B93CF002D2E02 /* ASButton.swift in Sources */,
 				1AA9D319224B93CF002D2E02 /* ASTimeAgo.swift in Sources */,
 				669DC88422F46DBB00794E0E /* CBSelectUserVC+SelectedUsers.swift in Sources */,

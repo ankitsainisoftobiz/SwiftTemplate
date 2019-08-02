@@ -1,9 +1,9 @@
 //
 //  CBGroupChat+TableView.swift
-//  ConetBook
+//  SwiftProject
 //
-//  Created by softobiz-as on 30/07/19.
-//  Copyright © 2019 Ankit_Saini. All rights reserved.
+//  Created by Ankit Saini on 02/07/19.
+//  Copyright © 2019 Ankit Saini. All rights reserved.
 //
 
 import Foundation

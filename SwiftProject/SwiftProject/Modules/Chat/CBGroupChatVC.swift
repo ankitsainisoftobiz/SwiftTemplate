@@ -1,9 +1,9 @@
 //
 //  CBGroupChatVC.swift
-//  ConetBook
+//  SwiftProject
 //
-//  Created by Gaurav Murghai on 25/07/19.
-//  Copyright © 2019 Ankit_Saini. All rights reserved.
+//  Created by Ankit Saini on 02/07/19.
+//  Copyright © 2019 Ankit Saini. All rights reserved.
 //
 
 import UIKit

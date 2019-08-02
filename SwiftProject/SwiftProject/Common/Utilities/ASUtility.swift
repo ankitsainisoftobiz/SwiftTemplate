@@ -88,12 +88,13 @@ class ASUtility: NSObject {
     /// - Parameters:
     ///   - msg: message to be shown on toast
     ///   - controller: controller from where this alert is called
-    func showToast(with msg: String, on controller: UIViewController? = nil) {
+    func showToast(with msg: String, on controller: UIViewController? = nil, completion: @escaping () -> Void) {
         
         let toast = UIAlertController(title: "", message: msg, preferredStyle: .alert)
         
         let dispatchTime = DispatchTime.now() + DispatchTimeInterval.seconds(2)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            completion()
             toast.dismiss(animated: true, completion: nil)
         }
         kMainQueue.async {

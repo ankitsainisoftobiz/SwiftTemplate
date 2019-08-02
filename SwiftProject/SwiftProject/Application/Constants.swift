@@ -40,6 +40,7 @@ enum Storyboard: String {
 enum BackgroundQueue {
     static let loginQueue = DispatchQueue(label: "com.app.queue_SignIn", attributes: .concurrent)
     static let polingQueue = DispatchQueue(label: "com.app.queue_poling", qos: .background)
+    static let awsDetail = DispatchQueue(label: "com.app.queue_awsdetail", qos: .background)
 }
 
 //MARK:- [  FONTS   ]

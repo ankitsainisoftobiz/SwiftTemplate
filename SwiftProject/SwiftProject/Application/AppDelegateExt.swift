@@ -62,7 +62,7 @@ extension AppDelegate {
         case .none:
             if toast == true {
                 kMainQueue.async {
-                    ASUtility.shared.showToast(with: L10n.noInternet.string)
+                    ASUtility.shared.showToast(with: L10n.noInternet.string) {}
                 }
             }
             print("internet not connected: None")
