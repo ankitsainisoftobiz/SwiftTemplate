@@ -12,6 +12,16 @@ class ASUtility: NSObject {
     
     static let shared = ASUtility()
     
+    /// Logs all available fonts from iOS SDK and installed custom font
+    class func logAllAvailableFonts() {
+        for family in UIFont.familyNames {
+            print("\(family)")
+            for name in UIFont.fontNames(forFamilyName: family) {
+                print("   \(name)")
+            }
+        }
+    }
+    
     /// This function is used to show an alert popup for confirmation of user.
     ///
     /// - Parameters:

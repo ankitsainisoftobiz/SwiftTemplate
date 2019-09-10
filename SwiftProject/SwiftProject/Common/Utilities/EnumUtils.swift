@@ -111,18 +111,6 @@ enum Notifications: String {
     }
 }
 
-//MARK:- [  FONTS   ]
-extension Font {
-    var val: UIFont {
-        return UIFont.systemFont(ofSize: self.info.size, weight: self.info.weight)
-    }
-    
-    func val(of weight: UIFont.Weight) -> UIFont {
-        return UIFont.systemFont(ofSize: self.info.size, weight: weight)
-    }
-}
-
-
 //
 //MARK:- Media Extensions
 //

@@ -38,6 +38,8 @@
 		1AA9D327224B93CF002D2E02 /* AppDelegateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9D30A224B93CF002D2E02 /* AppDelegateExt.swift */; };
 		1AA9D328224B93CF002D2E02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9D30B224B93CF002D2E02 /* Constants.swift */; };
 		1AA9D32A224B954C002D2E02 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1AA9D329224B954C002D2E02 /* .swiftlint.yml */; };
+		6672379F23278BCF00FEC6DA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6672379E23278BCF00FEC6DA /* Colors.swift */; };
+		667237A12327924A00FEC6DA /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667237A02327924A00FEC6DA /* Fonts.swift */; };
 		669DC86C22F46A5000794E0E /* CBGroupChat+Tokbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DC85C22F46A5000794E0E /* CBGroupChat+Tokbox.swift */; };
 		669DC86D22F46A5000794E0E /* CBGroupChat+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DC85D22F46A5000794E0E /* CBGroupChat+API.swift */; };
 		669DC86E22F46A5000794E0E /* CBGroupChat+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DC85E22F46A5000794E0E /* CBGroupChat+TableView.swift */; };
@@ -102,6 +104,8 @@
 		1AA9D30B224B93CF002D2E02 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1AA9D329224B954C002D2E02 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		45AABC2EC3CD7560AF5842FE /* Pods-SwiftProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftProject/Pods-SwiftProject.release.xcconfig"; sourceTree = "<group>"; };
+		6672379E23278BCF00FEC6DA /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		667237A02327924A00FEC6DA /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		669DC85C22F46A5000794E0E /* CBGroupChat+Tokbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBGroupChat+Tokbox.swift"; sourceTree = "<group>"; };
 		669DC85D22F46A5000794E0E /* CBGroupChat+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBGroupChat+API.swift"; sourceTree = "<group>"; };
 		669DC85E22F46A5000794E0E /* CBGroupChat+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBGroupChat+TableView.swift"; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		1AA9D2C1224B92D5002D2E02 /* SwiftProject */ = {
 			isa = PBXGroup;
 			children = (
+				6672379D23278B9800FEC6DA /* Themes */,
 				1AA9D308224B93CF002D2E02 /* Application */,
 				1AA9D2E1224B93CF002D2E02 /* AppModel */,
 				1AA9D2EB224B93CF002D2E02 /* Common */,
@@ -427,6 +432,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6672379D23278B9800FEC6DA /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				6672379E23278BCF00FEC6DA /* Colors.swift */,
+				667237A02327924A00FEC6DA /* Fonts.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
 		669DC85B22F46A5000794E0E /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,6 +669,7 @@
 				1AA9D326224B93CF002D2E02 /* AppDelegate.swift in Sources */,
 				1AA9D318224B93CF002D2E02 /* ASMiscExtensions.swift in Sources */,
 				1AA9D311224B93CF002D2E02 /* ASDataModal.swift in Sources */,
+				6672379F23278BCF00FEC6DA /* Colors.swift in Sources */,
 				1AA9D328224B93CF002D2E02 /* Constants.swift in Sources */,
 				1AA9D30F224B93CF002D2E02 /* ViewController.swift in Sources */,
 				669DC87722F46A5000794E0E /* ASChatEventCell.swift in Sources */,
@@ -669,6 +684,7 @@
 				1AA9D321224B93CF002D2E02 /* ASButton.swift in Sources */,
 				1AA9D319224B93CF002D2E02 /* ASTimeAgo.swift in Sources */,
 				669DC88422F46DBB00794E0E /* CBSelectUserVC+SelectedUsers.swift in Sources */,
+				667237A12327924A00FEC6DA /* Fonts.swift in Sources */,
 				669DC86D22F46A5000794E0E /* CBGroupChat+API.swift in Sources */,
 				1AA9D31D224B93CF002D2E02 /* ASImage.swift in Sources */,
 				1AA9D317224B93CF002D2E02 /* ASArrayExtensions.swift in Sources */,

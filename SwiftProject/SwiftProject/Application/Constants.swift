@@ -43,27 +43,6 @@ enum BackgroundQueue {
     static let awsDetail = DispatchQueue(label: "com.app.queue_awsdetail", qos: .background)
 }
 
-//MARK:- [  FONTS   ]
-///Extented further in EnumUtil.swift class
-enum Font {
-    case navTitle
-    case navButton
-    case textField
-    case formButtons
-    
-    var info: (size: CGFloat, weight: UIFont.Weight) {
-        switch self {
-        case .navTitle:
-            return (14.0, .regular)
-        case .navButton:
-            return (14.0, .regular)
-        case .textField:
-            return (14.0, .regular)
-        case .formButtons:
-            return (16.0, .semibold)
-        }
-    }
-}
 
 //MARK:- Device Constraints
 ///Extented further in EnumUtil.swift class

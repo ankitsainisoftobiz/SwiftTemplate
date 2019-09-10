@@ -30,7 +30,7 @@ class ASBaseVC: UIViewController {
     ///   - withTitle: Bar Title
     ///   - font: Font
     ///   - color: Text Color
-    func navBar(withTitle: String, font: UIFont = Font.navTitle.val, color: UIColor = .white) {
+    func navBar(withTitle: String, font: UIFont = Font.navTitle, color: UIColor = .white) {
         self.navigationItem.title = withTitle
         self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color]
     }
@@ -52,7 +52,7 @@ class ASBaseVC: UIViewController {
         
         btnRightMenu.frame = CGRect.init(x: 0, y: 0, width: 40, height: 30)
         btnRightMenu.addTarget(self, action: #selector(navRightClicked(sender:)), for: .touchUpInside)
-        btnRightMenu.titleLabel?.font = Font.navButton.val
+        btnRightMenu.titleLabel?.font = Font.navButton
         if right != nil {
             btnRightMenu.setImage(right, for: .normal)
         }

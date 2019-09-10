@@ -126,7 +126,7 @@ class ViewController: ASBaseVC {
     lazy var btnSubmit: Button = {
         let btn = Button.init(frame: CGRect.init(x: Screen.centerW-(170/2), y: txtPassword.frame.maxY + fieldMargin + 5, width: 170, height: self.fieldHeight-5))
         btn.setTitle("SUBMIT", for: .normal)
-        btn.titleLabel?.font = Font.formButtons.val
+        btn.titleLabel?.font = Font.formButtons
         btn.cornerRadius = (self.fieldHeight-5)/2
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .blueButton
