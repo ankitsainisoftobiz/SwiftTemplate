@@ -1,16 +1,16 @@
 //
 //  ASArrayExtensions.swift
-//  LowRateInsuranceAgency
+//  Dojo
 //
-//  Created by softobiz on 4/2/18.
-//  Copyright © 2018 Ankit_Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
 import Foundation
 
-// MARK: - Subscript
+// MARK:- Subscript
 extension Array {
-    
+    /// Subscript
     public subscript(safe index: Int) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
@@ -20,6 +20,8 @@ extension Array {
 // MARK: - Remove
 extension Array where Element: Equatable {
     
+    /// Remove object
+    /// - Parameter object: Iterator.Element
     public mutating func remove(object: Iterator.Element) -> Bool {
         if let index = self.firstIndex(of: object) {
             self.remove(at: index)
@@ -28,24 +30,32 @@ extension Array where Element: Equatable {
         return false
     }
     
+    /// Remove Element
+    /// - Parameter objects: Element
     public mutating func remove(objects: Element) {
         for idx in self.indexes(of: objects).reversed() {
             self.remove(at: idx)
         }
     }
     
+    /// Remove Duplicates
     public mutating func removeDuplicates() {
         self = reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
     }
     
+    /// Remove Duplicates
     public func removedDuplicates() -> [Element] {
         return reduce([]) { $0.contains($1) ? $0 : $0 + [$1] }
     }
     
+    /// Remove All Element
+    /// - Parameter item: Element
     public mutating func removeAll(_ item: Element) {
         self = filter { $0 != item }
     }
     
+    /// Remove All Element
+    /// - Parameter item: Element
     public mutating func removedAll(_ item: Element) -> [Element] {
         return filter { $0 != item }
     }
@@ -55,6 +65,8 @@ extension Array where Element: Equatable {
 // MARK: - Index Getter
 extension Array where Element: Equatable {
     
+    /// Indexes
+    /// - Parameter item: Element
     public func indexes(of item: Element) -> [Int] {
         var indexes = [Int]()
         for index in 0..<count where self[index] == item {
@@ -63,6 +75,8 @@ extension Array where Element: Equatable {
         return indexes
     }
     
+    /// First Index
+    /// - Parameter item: Element
     public func firstIndex(of item: Element) -> Int? {
         for (index, value) in lazy.enumerated() where value == item {
             return index
@@ -70,6 +84,8 @@ extension Array where Element: Equatable {
         return nil
     }
     
+    /// Last Index
+    /// - Parameter item: Element
     public func lastIndex(of item: Element) -> Int? {
         return indexes(of: item).last
     }
@@ -79,6 +95,8 @@ extension Array where Element: Equatable {
 // MARK: - Equatable Transform
 extension Array where Element: Equatable {
     
+    /// Diiference
+    /// - Parameter values: [Element]...
     public func difference(with values: [Element]...) -> [Element] {
         var result = [Element]()
         elements: for element in self {
@@ -92,6 +110,8 @@ extension Array where Element: Equatable {
         return result
     }
     
+    /// intersection
+    /// - Parameter values: [Element]
     public func intersection(for values: [Element]...) -> Array {
         var result = self
         var intersection = Array()
@@ -111,6 +131,8 @@ extension Array where Element: Equatable {
         return intersection
     }
     
+    /// Union
+    /// - Parameter values: [Element]...
     public func union(values: [Element]...) -> Array {
         var result = self
         for array in values {
@@ -123,6 +145,8 @@ extension Array where Element: Equatable {
         return result
     }
     
+    /// Split
+    /// - Parameter chunkSize: Int
     public func split(intoChunksOf chunkSize: Int) -> [[Element]] {
         return stride(from: 0, to: self.count, by: chunkSize).map {
             let endIndex = ($0.advanced(by: chunkSize) > self.count) ? self.count - $0 : chunkSize
@@ -135,12 +159,14 @@ extension Array where Element: Equatable {
 // MARK: - Transform
 extension Array {
     
+    /// Shuffled
     public func shuffled() -> [Element] {
         var array = self
         array.shuffle()
         return array
     }
     
+    /// Shuffle
     public mutating func shuffle() {
         guard count > 2 else {
             return
@@ -160,6 +186,8 @@ extension Array {
 // MARK: - Misc
 extension Array {
     
+    /// Test All
+    /// - Parameter test: Element
     public func testAll(test: (Element) -> Bool) -> Bool {
         for item in self {
             if !test(item) {
@@ -174,6 +202,8 @@ extension Array {
 // MARK: - Misc Equatable
 extension Array where Element: Equatable {
     
+    /// Contains Elements
+    /// - Parameter elements: [Element]
     public func contains(_ elements: [Element]) -> Bool {
         for item in elements {
             if contains(item) == false {

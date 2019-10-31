@@ -2,7 +2,7 @@
 //  CameraImage.swift
 //  Ankit_Saini
 //
-//  Created by softobiz on 11/13/17.
+//  Created by Ankit Saini on 11/13/17.
 //  Copyright © 2017 Ankit_Saini. All rights reserved.
 //
 
@@ -12,10 +12,15 @@ import UIKit
 import MobileCoreServices
 
 
+/// Media Types
 enum MediaType {
+    /// Image
     case image
+    
+    /// Video
     case video
     
+    /// String value
     var string: String {
         switch self {
         case .image:
@@ -29,18 +34,28 @@ enum MediaType {
 
 
 
+/// This class will be used to show media picker to user.
 class CameraImage: NSObject {
     
+    /// Shared instance
     static var shared = CameraImage()
+    
+    /// Caller view controller
     var fromVC: UIViewController?
+    
+    /// Completion handler for the class.
     var complete:((_ image: UIImage?, _ url: URL?) -> Void)?
     
+    /// Base Path of document directory to store videos.
     var dictionaryPath: String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
         guard let documentsDirectory = paths.firstObject as? String else { return "" }
         return documentsDirectory
     }
     
+    /// This function is used to show whether the permission for capturing is granted or not.
+    ///
+    /// - Returns: This will return true if permission granted else return false.
     func cameraNotPermitted() -> Bool {
         let status: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         
@@ -57,6 +72,7 @@ class CameraImage: NSObject {
         return true
     }
     
+    /// Open System settings to update permissions
     fileprivate func openSettings() {
         
         openAlert(title: "", message: L10n.youHaveDeniedThePermissionToAccessCamera.string, with: [L10n.settings.string]) { (index) in
@@ -72,6 +88,14 @@ class CameraImage: NSObject {
         }
     }
     
+    /// This will be used to capture images.
+    ///
+    /// - Parameters:
+    ///   - vc: Caller viewController
+    ///   - sources: Source array
+    ///   - crop: allow croping or not
+    ///   - fileTypes: Type of media to be picked
+    ///   - callBack: callback handler.
     func captureImage(from vc: UIViewController, captureOptions sources: [UIImagePickerController.SourceType], allowEditting crop: Bool, fileTypes: [MediaType], callBack: ((_ image: UIImage?, _ url: URL?) -> Void)?) {
         
         if cameraNotPermitted() {
@@ -98,6 +122,11 @@ class CameraImage: NSObject {
         }
     }
     
+    /// Open actionsheet to ask to select source.
+    ///
+    /// - Parameters:
+    ///   - imagePicker: Image picker instance
+    ///   - sources: Options array
     func openActionSheet(with imagePicker: UIImagePickerController, sources: [UIImagePickerController.SourceType]) {
         
         let actionSheet = UIAlertController(title: L10n.selectSource.string, message: nil, preferredStyle: .actionSheet)
@@ -129,6 +158,13 @@ class CameraImage: NSObject {
 
 extension CameraImage {
     
+    /// Open image picker with options.
+    ///
+    /// - Parameters:
+    ///   - from: UIViewController
+    ///   - source: UIImagePickerController.SourceType
+    ///   - mediaType: String
+    ///   - callBack: (_ image: UIImage?, _ url: URL?)
     func openOptions(from: UIViewController, source: UIImagePickerController.SourceType, of mediaType: String, callBack: ((_ image: UIImage?, _ url: URL?) -> Void)?) {
         
         let imagePicker = UIImagePickerController()
@@ -148,23 +184,30 @@ extension CameraImage {
 
 extension CameraImage: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    /// If device has camera or not
     var cameraExists: Bool {
         let front = UIImagePickerController.isCameraDeviceAvailable(.front)
         let rear = UIImagePickerController.isCameraDeviceAvailable(.rear)
         return front || rear
     }
     
+    /// User canceled the image picker options.
+    ///
+    /// - Parameter picker: UIImagePickerController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         guard let callBack = complete else {
             fromVC?.dismiss(animated: true, completion: nil)
-            releaseMemory()
             return
         }
         callBack(nil, nil)
         fromVC?.dismiss(animated: true, completion: nil)
-        releaseMemory()
     }
     
+    /// User finished with the image picker.
+    ///
+    /// - Parameters:
+    ///   - picker: UIImagePickerController
+    ///   - info: [UIImagePickerController.InfoKey: Any]
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var image: UIImage?
@@ -177,7 +220,6 @@ extension CameraImage: UIImagePickerControllerDelegate, UINavigationControllerDe
         //Get file by checking its file type
         guard let mediaType = info[.mediaType] as? String else {
             fromVC?.dismiss(animated: true, completion: nil)
-            releaseMemory()
             return
             
         }
@@ -197,19 +239,12 @@ extension CameraImage: UIImagePickerControllerDelegate, UINavigationControllerDe
             }
         }
         fromVC?.dismiss(animated: true, completion: nil)
-        releaseMemory()
-    }
-    
-    /// Release parent controllers and memory
-    func releaseMemory() {
-        autoreleasepool(invoking: {
-            fromVC = nil
-        })
     }
 }
 
 extension UIImagePickerController.SourceType {
     
+    /// Name of the option
     var name: String {
         
         switch self {
@@ -223,13 +258,19 @@ extension UIImagePickerController.SourceType {
             return L10n.savedPhotoAlbum.string
             
         @unknown default:
-            return ""
+            return L10n.photoLibrary.string
         }
     }
 }
 
 extension CameraImage {
     
+    /// Compress the video
+    ///
+    /// - Parameters:
+    ///   - fromUrl: URL
+    ///   - url: To which URL
+    ///   - completionHandler: (_ exportSession: AVAssetExportSession)
     func compressVideoFromInputUrl(_ fromUrl: URL, toUrl url: URL, completionHandler: @escaping ((_ exportSession: AVAssetExportSession) -> Void)) {
         
         do {
@@ -247,6 +288,9 @@ extension CameraImage {
     }
     
     
+    /// Get url of the video from the file url.
+    ///
+    /// - Parameter url: file URL
     func getUrlFromVideoFile(url: URL) {
         
         let documentPath = self.dictionaryPath.appendingFormat("/%@", "video.mp4")

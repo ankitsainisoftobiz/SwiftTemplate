@@ -1,27 +1,33 @@
 //
 //  ASUtility.swift
-//  SwiftProject
+//  Dojo
 //
-//  Created by Gaurav Murghai on 20/03/19.
-//  Copyright © 2019 Ankit Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
+/// This class will represent some common functions which will be used in the project.
 class ASUtility: NSObject {
     
+    /// Shared instance
     static let shared = ASUtility()
     
-    /// Logs all available fonts from iOS SDK and installed custom font
-    class func logAllAvailableFonts() {
-        for family in UIFont.familyNames {
-            print("\(family)")
-            for name in UIFont.fontNames(forFamilyName: family) {
-                print("   \(name)")
+    /// Print all available fonts in console
+    func logAllAvailableFonts() {
+        let familyNames = UIFont.familyNames
+
+        for family in familyNames {
+            print("Family name " + family)
+            let fontNames = UIFont.fontNames(forFamilyName: family)
+            
+            for font in fontNames {
+                print("    Font name: " + font)
             }
         }
     }
-    
     /// This function is used to show an alert popup for confirmation of user.
     ///
     /// - Parameters:
@@ -31,7 +37,7 @@ class ASUtility: NSObject {
     ///   - lblCancel: lable string for the cancel button
     ///   - controller: controller from where this alert is called
     ///   - completion: return the result.
-    func showConfirmAlert(with title: String, message: String, lblDone: String, lblCancel: String, on controller: UIViewController? = nil, completion: @escaping (_ choice: Bool) -> Void) {
+    func showConfirmAlert(with title: String, message: String, lblDone: String, lblCancel: String, completion: @escaping (_ choice: Bool) -> Void) {
         
         let objAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -46,10 +52,6 @@ class ASUtility: NSObject {
         }))
         
         kMainQueue.async {
-            if controller != nil {
-                controller!.present(objAlert, animated: true, completion: nil)
-                return
-            }
             guard let topController = UIApplication.topViewController() else {
                 kAppDelegate.window?.rootViewController?.present(objAlert, animated: true, completion: nil)
                 return
@@ -69,22 +71,23 @@ class ASUtility: NSObject {
     ///   - message: Brief message for the alert
     ///   - lblDone: Lable string for the done button
     ///   - controller: controller from where this alert is called
-    func dissmissAlert(title: String, message: String, lblDone: String, on controller: UIViewController? = nil) {
+    ///   - onPrevAlert: if true then the alert will be shown on previous alert itself if present. else only present alert if there is no alert controller already showing.
+    ///   - completion: completion handler once user pressed the button.
+    func dissmissAlert(title: String, message: String, lblDone: String, onPrevAlert: Bool = false, completion: ((_ choice: Bool) -> Void)? = nil) {
+    
         let objAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         objAlert.addAction(UIAlertAction(title: lblDone, style: .default, handler: { (_) in
+            completion?(true)
+            return
         }))
         
         kMainQueue.async {
-            if controller != nil {
-                controller!.present(objAlert, animated: true, completion: nil)
-                return
-            }
             guard let topController = UIApplication.topViewController() else {
                 kAppDelegate.window?.rootViewController?.present(objAlert, animated: true, completion: nil)
                 return
             }
-            if topController.isKind(of: UIAlertController.self) {
+            if topController.isKind(of: UIAlertController.self) && onPrevAlert == false {
                 print("Not showing alert as another UIAlertController is present already.")
                 return
             }
@@ -98,20 +101,17 @@ class ASUtility: NSObject {
     /// - Parameters:
     ///   - msg: message to be shown on toast
     ///   - controller: controller from where this alert is called
-    func showToast(with msg: String, on controller: UIViewController? = nil, completion: @escaping () -> Void) {
+    func showToast(with msg: String, completion: @escaping () -> Void) {
         
         let toast = UIAlertController(title: "", message: msg, preferredStyle: .alert)
         
         let dispatchTime = DispatchTime.now() + DispatchTimeInterval.seconds(2)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            completion()
             toast.dismiss(animated: true, completion: nil)
+            completion()
+            return
         }
         kMainQueue.async {
-            if controller != nil {
-                controller!.present(toast, animated: true, completion: nil)
-                return
-            }
             guard let topController = UIApplication.topViewController() else {
                 kAppDelegate.window?.rootViewController?.present(toast, animated: true, completion: nil)
                 return

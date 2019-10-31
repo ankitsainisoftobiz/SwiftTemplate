@@ -1,18 +1,22 @@
 PODS:
-  - GrowingTextView (0.7.0)
-  - IQKeyboardManagerSwift (6.2.0)
-  - ReachabilitySwift (4.3.0)
-  - SDWebImage (5.0.6):
-    - SDWebImage/Core (= 5.0.6)
-  - SDWebImage/Core (5.0.6)
+  - GrowingTextView (0.7.1)
+  - IQKeyboardManagerSwift (6.5.2)
+  - MRCountryPicker (0.0.8)
+  - Popover (1.2.2)
+  - ReachabilitySwift (5.0.0)
+  - SDWebImage (5.2.5):
+    - SDWebImage/Core (= 5.2.5)
+  - SDWebImage/Core (5.2.5)
   - SKPhotoBrowser (6.1.0)
-  - SkyFloatingLabelTextField (3.6.0)
+  - SkyFloatingLabelTextField (3.7.0)
   - SVProgressHUD (2.2.5)
-  - SwiftLint (0.31.0)
+  - SwiftLint (0.36.0)
 
 DEPENDENCIES:
   - GrowingTextView (~> 0.5)
   - IQKeyboardManagerSwift
+  - MRCountryPicker
+  - Popover
   - ReachabilitySwift
   - SDWebImage
   - SKPhotoBrowser
@@ -21,9 +25,11 @@ DEPENDENCIES:
   - SwiftLint
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - GrowingTextView
     - IQKeyboardManagerSwift
+    - MRCountryPicker
+    - Popover
     - ReachabilitySwift
     - SDWebImage
     - SKPhotoBrowser
@@ -32,15 +38,17 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
-  GrowingTextView: b946b0d1c33e0953725b9695d14f144cc35b2031
-  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  GrowingTextView: 6dff7eedf2fc93f8378d20d456782afd0267b0cc
+  IQKeyboardManagerSwift: c75366f1f19590e8caeae45fcd5815c9289d6099
+  MRCountryPicker: 1aeea66de25cdef79dce3b91d8ad9db643c1cc01
+  Popover: 21e357f86d45c8d9e29a41a4adbca3664d6e511f
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SDWebImage: 4eabf2fa6695c95c47724214417a9c036c965e4a
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
-  SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
+  SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+  SwiftLint: fc9859e4e1752340664851f667bb1898b9c90114
 
-PODFILE CHECKSUM: d0a58922fc1dba7bcf657cafda5691e7904aa33e
+PODFILE CHECKSUM: cd8b75b885395f4e21259a53f51bf93eeec030c1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

@@ -1,9 +1,9 @@
 //
 //  EnumUtils.swift
-//  SwiftProject
+//  Dojo
 //
-//  Created by Gaurav Murghai on 20/03/19.
-//  Copyright © 2019 Ankit Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
 import Foundation
@@ -39,12 +39,19 @@ extension API {
 
 //MARK:- Device Constraints
 extension Screen {
+    /// Main Screen
     static let main = UIScreen.main
+    /// Screen Width
     static let width = UIScreen.main.bounds.size.width
+    ///Screen Height
     static let height = UIScreen.main.bounds.size.height
+    /// Screen center width
     static let centerW = Screen.width/2
+    /// Screen center height
     static let centerH = Screen.height/2
+    /// UserInterfaceIdiom
     static let deviceIdiom = main.traitCollection.userInterfaceIdiom
+    /// Is device Ipad?
     static let isIPAD: Bool = deviceIdiom == UIUserInterfaceIdiom.pad ? true : false
 }
 
@@ -76,23 +83,24 @@ extension UIViewController {
     }
 }
 
-/// ViewController Identifier
-enum VCIdentifier {
-    static let mainSignIn = "TDLoginVC"
-    static let welcomeVC = "TDWelcomeVC"
-}
 //MARK:
 //MARK:        [---------- STORYBOARD SETTINGS [END] ----------]
 //MARK:-
+/// HTTP METHODS
 extension HttpMethods {
+    /// GET Method
     static let get = "GET"
+    /// POST Method
     static let post = "POST"
 }
 
 // MARK: - ContentType
 extension ContentType {
+    /// application/x-www-form-urlencoded
     static let applicationXWWFormUrlencoded = "application/x-www-form-urlencoded"
+    /// application/json
     static let applicationJson = "application/json"
+    /// multipart/form-data
     static let multipartFormData = "multipart/form-data"
 }
 
@@ -102,10 +110,12 @@ extension ContentType {
 
 /// This Enum is used to get the notification name.
 enum Notifications: String {
-    
+    /// Remove splash
     case splashRemove
+    /// Logout User
     case logout
     
+    /// Name of the notification
     var name: Notification.Name {
         return Notification.Name(rawValue: self.rawValue )
     }
@@ -114,20 +124,31 @@ enum Notifications: String {
 //
 //MARK:- Media Extensions
 //
+/// Media File Extensions
 enum MediaExtension: String {
+    /// PNG
     case png = "png"
+    /// JPG
     case jpg = "jpg"
+    /// JPEG
     case jpeg = "jpeg"
+    /// MP4
     case mp4 = "mp4"
+    /// DOC
     case doc = "doc"
+    /// DOCX
     case docX = "docx"
+    /// PDF
     case pdf = "pdf"
+    /// XLS
     case xls = "xls"
     
+    /// Name appended with (.)
     var dotName: String {
         return ".\(self.rawValue)"
     }
     
+    /// Name
     var name: String {
         return self.rawValue
     }

@@ -1,9 +1,9 @@
 //
 //  ASMiscExtensions.swift
-//  LowRateInsuranceAgency
+//  Dojo
 //
-//  Created by softobiz on 12/7/17.
-//  Copyright © 2017 Ankit_Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
 import Foundation
@@ -11,12 +11,20 @@ import UIKit
 
 //MARK:- NSObject
 //MARK:
+
+// MARK: - GLOBAL FUNCTIONS
 extension NSObject {
     
+    /// This will be used to present an UIAlertController
+    ///
+    /// - Parameters:
+    ///   - title: Title of the alert
+    ///   - strMessage: Message of the alert
+    ///   - options: Buttons array of string
+    ///   - didSelect: selected index of option
     func openAlert(title: String?,
                    message strMessage: String?,
                    with options: [String],
-                   controller: UIViewController? = nil,
                    didSelect:@escaping(_ index: Int?) -> Void) {
         let alert = UIAlertController(title: title, message: strMessage, preferredStyle: .alert)
         for (i,option) in options.enumerated() {
@@ -28,17 +36,23 @@ extension NSObject {
         let cancel = UIAlertAction(title: L10n.cancel.string, style: .cancel) { (_) in
         }
         alert.addAction(cancel)
-        if controller != nil {
-            controller!.present(alert, animated: true, completion: nil)
+        guard let topController = UIApplication.topViewController() else {
+            kAppDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
             return
         }
-        kAppDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        topController.present(alert, animated: true, completion: nil)
     }
     
+    /// This will be used to present an Actiuon sheet
+    ///
+    /// - Parameters:
+    ///   - title: Title of the sheet
+    ///   - strMessage: Message of the sheet
+    ///   - options: array of options
+    ///   - didSelect: Selected index of the option
     func openActionSheet(title: String?,
                          message strMessage: String?,
                          with options: [String],
-                         controller: UIViewController? = nil,
                          didSelect:@escaping(_ index: Int?) -> Void) {
         let alert = UIAlertController(title: title, message: strMessage, preferredStyle: .actionSheet)
         for (i,option) in options.enumerated() {
@@ -52,28 +66,35 @@ extension NSObject {
         }
         alert.addAction(cancel)
         
+        guard let topController = UIApplication.topViewController() else {
+            alert.popoverPresentationController?.sourceView = kAppDelegate.window?.rootViewController?.view
+            alert.popoverPresentationController?.permittedArrowDirections = []
+            alert.popoverPresentationController?.sourceRect = CGRect.init(x: Screen.centerW, y: Screen.centerH, width: 0, height: 0)
+            kAppDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            return
+        }
         if Screen.isIPAD == true {
-            if controller != nil {
-                alert.popoverPresentationController?.sourceView = controller?.view
-            } else {
-                alert.popoverPresentationController?.sourceView = kAppDelegate.window?.rootViewController?.view
-            }
+            alert.popoverPresentationController?.sourceView = topController.view
             alert.popoverPresentationController?.permittedArrowDirections = []
             alert.popoverPresentationController?.sourceRect = CGRect.init(x: Screen.centerW, y: Screen.centerH, width: 0, height: 0)
         }
-        if controller != nil {
-            controller!.present(alert, animated: true, completion: nil)
-            return
-        }
-        kAppDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        topController.present(alert, animated: true, completion: nil)
     }
     
+    /// This will animate the view when show or hide them
+    ///
+    /// - Parameters:
+    ///   - view: UIView instance on which animation will be applied
+    ///   - show: Show => True, Hide => False
     func viewShowHideAnimationWith(view: UIView, show: Bool) {
         UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: {
-            view.isHidden = show
+            view.isHidden = !show
         }, completion: nil)
     }
     
+    /// Get the safe area values of auto layout.
+    ///
+    /// - Returns: top: CGFloat, bottom: CGFloat, left: CGFloat, right: CGFloat
     func safeAreaHeight() -> (top: CGFloat, bottom: CGFloat, left: CGFloat, right: CGFloat) {
         if #available(iOS 11.0, *) {
             guard let window = UIApplication.shared.keyWindow else {return (0, 0, 0, 0)}
@@ -88,17 +109,55 @@ extension NSObject {
         return (0, 0, 0, 0)
     }
     
+    /// Returns the status bar heiht of the screen
+    ///
+    /// - Returns: CGFloat
     func statusBarHeight() -> CGFloat {
         let height = UIApplication.shared.statusBarFrame.height
         //print(height)
         return height
     }
+    
+    
+    /// This function will remove all the coockies associated with URLCache
+    func clearCacheCookies() {
+        //
+        //Cookies
+        //
+        //let cookie = HTTPCookie.self
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            print("cookieName:"+cookie.name+"="+cookie.value)
+            cookieJar.deleteCookie(cookie)
+        }
+        //
+        //cache
+        //
+        URLCache.shared.removeAllCachedResponses()
+        URLCache.shared.diskCapacity = 0
+        URLCache.shared.memoryCapacity = 0
+    }
+    
+    /// Convert seconds to Hours Minutes Seconds
+    ///
+    /// - Parameter seconds: Int
+    /// - Returns: h: Int, m: Int, s: Int
+    func secondsToHoursMinutesSeconds (seconds: Int) -> (h: Int, m: Int, s: Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
 }
 //
 //MARK:- UIButton
 //MARK:
+///UIButton
 extension UIButton {
     
+    /// Add a border to the right of the UIButton.
+    ///
+    /// - Parameters:
+    ///   - borderColor: UIColor
+    ///   - borderWidth: CGFloat
+    ///   - yCo: CGFloat
     func addRightBorder(borderColor: UIColor, borderWidth: CGFloat, yCo: CGFloat) {
         let border = CALayer()
         border.backgroundColor = borderColor.cgColor
@@ -106,6 +165,11 @@ extension UIButton {
         self.layer.addSublayer(border)
     }
     
+    /// Add border to left of the UIButton
+    ///
+    /// - Parameters:
+    ///   - color: UIColor
+    ///   - width: CGFloat
     func addLeftBorder(color: UIColor, width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
@@ -113,6 +177,9 @@ extension UIButton {
         self.layer.addSublayer(border)
     }
     
+    /// Center the image and title of UIButton
+    ///
+    /// - Parameter padding: CGFloat
     func centerVerticallyWithPadding(padding: CGFloat) {
         let imageSize = self.imageView!.frame.size
         let titleSize = self.titleLabel!.frame.size
@@ -125,25 +192,22 @@ extension UIButton {
         
     }
     
+    /// Center the image and title of UIButton
     func centerVertically() {
         centerVerticallyWithPadding(padding: 6.0)
     }
     
 }
 //
-//MARK:- UIScrollView
-//MARK:
-extension UIScrollView {
-    func scrollToY(yCo: CGFloat) {
-        let offset = CGPoint.init(x: 0, y: yCo)
-        self.setContentOffset(offset, animated: true)
-    }
-}
-
-//
 //MARK:- StackView
 //MARK:
 extension UIStackView {
+    
+    /// Add a border to the top of the UIStackView.
+    ///
+    /// - Parameters:
+    ///   - color: UIColor
+    ///   - width: CGFloat
     func addTopBorder(color: UIColor, width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
@@ -152,199 +216,35 @@ extension UIStackView {
     }
 }
 
-
-//
-//MARK:- UIView
-//MARK:
-import QuartzCore
-extension UIView {
-    func addDashedBorder(color: UIColor = .black) {
-        let yourViewBorder = CAShapeLayer()
-        yourViewBorder.strokeColor = color.cgColor
-        yourViewBorder.lineDashPattern = [4, 4]
-        yourViewBorder.frame = self.bounds
-        yourViewBorder.fillColor = nil
-        yourViewBorder.path = UIBezierPath(rect: self.bounds).cgPath
-        self.layer.addSublayer(yourViewBorder)
-    }
-}
-
-//
-//MARK:- String
-//MARK:
-extension String {
-    
-    func attributtedString(appendString: String, color1: UIColor, color2: UIColor, font1: UIFont, font2: UIFont, lineSpacing: CGFloat = 0, align: Int = 0) -> NSAttributedString {
-        let strSubTitle = appendString
-        let fullString = "\(self)\(strSubTitle)"
-        
-        let attString = NSMutableAttributedString.init(string: fullString)
-        
-        //Font
-        attString.addAttribute(NSAttributedString.Key.font, value: font1, range: NSRange(location: 0, length: self.count))
-        attString.addAttribute(NSAttributedString.Key.font, value: font2, range: NSRange(location: fullString.count - strSubTitle.count, length: strSubTitle.count))
-        
-        //Color
-        attString.addAttribute(NSAttributedString.Key.foregroundColor, value: color1, range: NSRange(location: 0, length: attString.length))
-        attString.addAttribute(NSAttributedString.Key.foregroundColor, value: color2, range: NSRange(location: attString.length - strSubTitle.count, length: strSubTitle.count))
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        
-        if lineSpacing > 0 {
-            // *** set LineSpacing property in points ***
-            paragraphStyle.lineSpacing = lineSpacing // Whatever line spacing you want in points
-            
-        }
-        if align > 0 {
-            paragraphStyle.alignment = align == 1 ? .left : align == 2 ? .center : .right
-        }
-        
-        if lineSpacing > 0 || align > 0 {
-            attString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attString.length))
-        }
-        
-        return attString
-    }
-    
-    func isValidEmail() -> Bool {
-        let emailRegex: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-        let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailTest.evaluate(with: self)
-    }
-    
-    func initials() -> (String, String) {
-        if self.isEmpty == false {
-            var fChar: Character?
-            if let first = self.first {
-                fChar = first
-            }
-            
-            let arrName = self.components(separatedBy: " ")
-            if arrName.count > 1 {
-                let lastname = arrName[1]
-                if let lName = lastname.first {
-                    if fChar != nil {
-                        return ("\(fChar!)", "\(lName)")
-                    }
-                    return ("", "\(lName)")
-                }
-                if fChar != nil {
-                    return ("\(fChar!)", "")
-                }
-            }
-            return (first != nil ? "\(first!)" : "", "")
-        }
-        return ("", "")
-    }
-    
-    static func randomString(len: Int) -> String {
-        let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var c = Array(charSet)
-        var s: String = ""
-        for _ in 1...len {
-            s.append(c[Int(arc4random()) % c.count])
-        }
-        return s
-    }
-    
-    func with(ext: MediaExtension) -> String {
-        return "\(self)\(ext.dotName)"
-    }
-    
-    func toDictionary() -> Dictionary<String, Any> {
-        if let data = self.data(using: .utf8) {
-            do {
-                if let serverResponse = try JSONSerialization.jsonObject(with: data as Data, options: []) as? [String: Any] {
-                    return serverResponse
-                }
-            } catch {
-                print(error.localizedDescription)
-                return [:]
-            }
-        }
-        return [:]
-    }
-    
-    func intVal() -> Int {
-        if self.isEmpty == true {
-            return 0
-        }
-        return (self as NSString).integerValue
-    }
-    
-    func floatVal() -> CGFloat {
-        let fl: CGFloat = CGFloat((self as NSString).doubleValue)
-        return fl
-    }
-    
-    func encoding() -> String {
-        let str = self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        if str != nil { return str! }
-        return self
-    }
-    
-    func decoding() -> String {
-        let str = self.removingPercentEncoding
-        if str != nil { return str! }
-        return self
-    }
-}
-
-// MARK:-
-// MARK: UIViewController
-// MARK:
-
-
-extension UIViewController {
-    func disableSwipeBack(choice: Bool) {
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = !choice
-    }
-}
-
-//
-//MARK:- UIcollectionView
-//MARK:
-extension UICollectionView {
-    
-    func scrollToLast(animated: Bool) {
-        if self.numberOfItems(inSection: 0) > 0 {
-            let index = IndexPath(item: self.numberOfItems(inSection: 0)-1, section: 0)
-            self.scrollToItem(at: index, at: .right, animated: animated)
-        }
-    }
-    
-    func scrollToFirst(animated: Bool) {
-        if self.numberOfItems(inSection: 0) > 0 {
-            let index = IndexPath(item: 0, section: 0)
-            self.scrollToItem(at: index, at: .right, animated: animated)
-        }
-    }
-    
-    func scrollToItem(item: Int, animated: Bool) {
-        if self.numberOfItems(inSection: 0) >= item {
-            let index = IndexPath(item: item, section: 0)
-            self.scrollToItem(at: index, at: .right, animated: animated)
-        }
-    }
-}
-
 //MARK:-
 //MARK: TextField
 //MARK:
 extension UITextField {
+    
+    /// Set left padding of the field.
+    ///
+    /// - Parameter amount: CGFloat
     func setLeftPaddingPoints(_ amount: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.leftView = paddingView
         self.leftViewMode = .always
     }
+    
+    /// Set right padding of the field.
+    ///
+    /// - Parameter amount: CGFloat
     func setRightPaddingPoints(_ amount: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.rightView = paddingView
         self.rightViewMode = .always
     }
     
+    /// Mask a textfield according to a paatern like (XXX) XXX-XXXX
+    ///
+    /// - Parameter maskFormat: (XXX) XXX-XXXX
+    /// - Returns: String
     func getMaskPhoneNumber(maskFormat: String = "(XXX) XXX-XXXX") -> String {
-        let resultString = self.text!
+        let resultString = self.text ?? ""
         
         let cleanPhoneNumber = resultString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         
@@ -367,11 +267,24 @@ extension UITextField {
         return result
     }
     
+    /// Get Unmask phone number from a string
+    /// - Parameter literals: [String] = [" ", "(", ")", "-"]
+    func getUnMaskPhone(literals: [String] = [" ", "(", ")", "-"]) -> String {
+        var phone = self.text ?? ""
+        for item in literals {
+            phone = phone.replacingOccurrences(of: item, with: "")
+        }
+        return phone
+    }
+    
 }
 
 //MARK:- Dictionary
-
 extension Dictionary {
+    
+    /// Convert dictionary to string
+    ///
+    /// - Returns: String
     func toString() -> String {
         if let theJSONData = try? JSONSerialization.data(withJSONObject: self, options: []) {
             let theJSONText = String(data: theJSONData, encoding: .ascii)
@@ -384,6 +297,9 @@ extension Dictionary {
         return ""
     }
     
+    /// Conver the dictionary to Data()
+    ///
+    /// - Returns: Data
     func toData() -> Data {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
@@ -395,6 +311,10 @@ extension Dictionary {
         }
     }
     
+    /// get a string value from the dictionary
+    ///
+    /// - Parameter name: Key name
+    /// - Returns: value String
     func getStringVal(name: String) -> String {
         
         guard let dict = self as? Dictionary<String, Any> else { return "" }
@@ -409,15 +329,30 @@ extension Dictionary {
     }
 }
 
-//MARK:- UIViewController
-
+// MARK:-
+// MARK: UIViewController
+// MARK:
 extension UIViewController {
+    
+    /// Disable swipe back of navigationController
+    ///
+    /// - Parameter choice: true or false
+    func disableSwipeBack(choice: Bool) {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = !choice
+    }
+
+    /// String representation of UIViewController name
     var className: String {
-        return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!
+        return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last ?? ""
     }
 }
-
+//MARK:- UIApplication
 extension UIApplication {
+    
+    /// Fetch the topViewController
+    ///
+    /// - Parameter controller: rootViewController
+    /// - Returns: UIViewController
     class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
@@ -434,82 +369,55 @@ extension UIApplication {
     }
 }
 
-extension UITableView {
-    func scrollToBottom() {
-        kMainQueue.async {
-            let sections = self.numberOfSections
-            if sections > 0 {
-                let rows = self.numberOfRows(inSection: sections-1)
-                if rows > 0 {
-                    let indexPath = IndexPath(row: rows-1, section: sections-1)
-                    self.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                }
-            }
-        }
-    }
-}
-
+//MARK:- Bundle
 extension Bundle {
+    
+    /// Bundle displayName
     var displayName: String? {
         let name = object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
         return name ?? object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
     }
     
+    /// Bundle releaseVersionNumber String
     var releaseVersionNumber: String? {
         return infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
+    /// Bundle buildVersionNumber String
     var buildVersionNumber: String? {
         return infoDictionary?["CFBundleVersion"] as? String
     }
     
 }
-
+//MARK:- Int
 extension Int {
+    
+    /// Represent the value in Thousand
+    ///
+    /// - Returns: String
     func inThousand() -> String {
-        return self/1000 > 0 ? "\(self/1000)K" : "\(self)"
+        return self/1000 > 0 ? "\(Int(self/1000))K" : "\(self)"
     }
 }
 
+// MARK: - CGFloat
 extension CGFloat {
+    
+    /// Represent the value in Thousand
+    ///
+    /// - Returns: String
     func inThousand() -> String {
         return self/1000 >= 1 ? "\(Int(self/1000))K" : "\(self)"
     }
 }
 
-
-//MARK:- UINavigationBar
-extension UINavigationBar {
-    /// SwifterSwift: Set navigationBar background and text colors
-    ///
-    /// - Parameters:
-    ///   - background: backgound color
-    ///   - text: text color
-    public func setColors(background: UIColor, text: UIColor) {
-        isTranslucent = false
-        backgroundColor = background
-        barTintColor = background
-        setBackgroundImage(UIImage(), for: .default)
-        tintColor = text
-        titleTextAttributes = [.foregroundColor: text]
-    }
-    
-    /// SwifterSwift: Make navigation bar transparent.
-    ///
-    /// - Parameter tint: tint color (default is .white).
-    public func makeTransparent(withTint tint: UIColor = .white) {
-        isTranslucent = true
-        backgroundColor = .clear
-        barTintColor = .clear
-        setBackgroundImage(UIImage(), for: .default)
-        tintColor = tint
-        titleTextAttributes = [.foregroundColor: tint]
-        shadowImage = UIImage()
-    }
-}
-
-
+// MARK: - URL
 extension URL {
+    
+    /// Parse Query Url
+    ///
+    /// - Parameter queryParamaterName: name of the key
+    /// - Returns: String value for the key
     func valueOf(_ queryParamaterName: String) -> String {
         guard let url = URLComponents(string: self.absoluteString) else { return "" }
         let dict = url.queryItems?.first(where: { $0.name == queryParamaterName })

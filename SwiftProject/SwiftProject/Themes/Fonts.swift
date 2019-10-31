@@ -1,9 +1,9 @@
 //
 //  Fonts.swift
-//  SwiftProject
+//  Dojo
 //
-//  Created by softobiz-as on 10/09/19.
-//  Copyright © 2019 Ankit Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
 import Foundation
@@ -12,41 +12,62 @@ import UIKit
 /// Fonts
 struct Font {
     // Usage Examples
-    static let navTitle            = Font(.system, size: .standard(.h4)).instance
-    static let navButton            = Font(.system, size: .standard(.h4)).instance
-    static let textField            = Font(.system, size: .standard(.h4)).instance
-    static let formButtons            = Font(.systemWeighted(weight: .semibold), size: .standard(.h3)).instance
     
-    static let robotoBlack14       = Font(.installed(.robotoBlack), size: .standard(.h4)).instance
-    static let helveticaLight13    = Font(.custom("Helvetica-Light"), size: .custom(13.0)).instance
+    /// Navigation Bar title
+    static let navTitle = Font(.system, size: .standard(.h4)).instance
+    
+    /// Navigation Bar buttons
+    static let navButton = Font(.system, size: .standard(.h4)).instance
+    
+    /// Text Fields Placeholders
+    static let textFieldPlaceHolderFont = Font(.systemWeighted(weight: .medium), size: .standard(.h1)).instance
+    
+    /// Text Fields Title Fonts
+    static let textFieldTitleFont = Font(.systemBold, size: .standard(.h5)).instance
+    
+    /// Text Fields Fonts
+    static let textFieldFont = Font(.systemWeighted(weight: .medium), size: .standard(.h3)).instance
+    
+    /// Form Buttons
+    static let formButtons = Font(.systemBold, size: .standard(.h3)).instance
+    
+    /// Custom font
+    static let sairaBlack14 = Font(.system, size: .standard(.h4)).instance
+    
+    /// Custom string font
+    static let helveticaLight13 = Font(.custom("Helvetica-Light"), size: .custom(13.0)).instance
     
     
     /// FontType
-    ///
-    /// - installed: installed(FontName)
-    /// - custom: custom(String)
-    /// - system: system
-    /// - systemBold: systemBold
-    /// - systemItatic: systemItatic
-    /// - systemWeighted: systemWeighted(weight: UIFont.Weight)
-    /// - monoSpacedDigit: monoSpacedDigit(size: Double, weight: Double)
     enum FontType {
+        /// installed: installed(FontName)
         case installed(FontName)
+        
+        /// custom: custom(String)
         case custom(String)
+        
+        /// system: system
         case system
+        
+        /// systemBold: systemBold
         case systemBold
+        
+        /// systemItatic: systemItatic
         case systemItatic
+        
+        /// systemWeighted: systemWeighted(weight: UIFont.Weight)
         case systemWeighted(weight: UIFont.Weight)
-        case monoSpacedDigit(size: Double, weight: Double)
     }
     
     /// FontSize
-    ///
-    /// - standard: standard(StandardSize)
-    /// - custom: custom(Double)
     enum FontSize {
+        /// standard: standard(StandardSize)
         case standard(StandardSize)
+        
+        /// custom: custom(Double)
         case custom(Double)
+        
+        /// Value: Double
         var value: Double {
             switch self {
             case .standard(let size):
@@ -58,10 +79,9 @@ struct Font {
     }
     
     /// FontName
-    ///
-    /// - robotoBlack: "Roboto-Black"
     enum FontName: String {
-        case robotoBlack            = "Roboto-Black"
+        /// Roboto-Black
+        case robotoBlack = "Roboto-Black"
     }
     
     /// StandardSize
@@ -73,11 +93,22 @@ struct Font {
     /// - h5: 12.0
     /// - h6: 10.0
     enum StandardSize: Double {
+        ///  h1 = 20.0
         case h1 = 20.0
+        
+        /// h2 = 18.0
         case h2 = 18.0
+        
+        /// h3 = 16.0
         case h3 = 16.0
+        
+        /// h4 = 14.0
         case h4 = 14.0
+        
+        /// h5 = 12.0
         case h5 = 12.0
+        
+        /// h6 = 10.0
         case h6 = 10.0
     }
     
@@ -104,7 +135,9 @@ extension Font {
     /// UIFont
     var instance: UIFont {
         
+        /// Instance Font: UIFont
         var instanceFont: UIFont!
+        
         switch type {
         case .custom(let fontName):
             guard let font =  UIFont(name: fontName, size: CGFloat(size.value)) else {
@@ -125,9 +158,6 @@ extension Font {
         case .systemWeighted(let weight):
             instanceFont = UIFont.systemFont(ofSize: CGFloat(size.value),
                                              weight: weight)
-        case .monoSpacedDigit(let size, let weight):
-            instanceFont = UIFont.monospacedDigitSystemFont(ofSize: CGFloat(size),
-                                                            weight: UIFont.Weight(rawValue: CGFloat(weight)))
         }
         return instanceFont
     }

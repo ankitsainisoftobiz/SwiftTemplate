@@ -7,50 +7,56 @@ inhibit_all_warnings!
 target 'SwiftProject' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  
   # Pods for SwiftProject
-
-pod 'SwiftLint'
-
-
-# keyboard handling
-pod 'IQKeyboardManagerSwift'
-
-# loader
-pod 'SVProgressHUD'
-
-# Internet checking
-pod 'ReachabilitySwift'
-
-# floating lables in textfield
-pod 'SkyFloatingLabelTextField'
-
-# photo viewer
-pod 'SKPhotoBrowser'
-
-# lazy loading of images
-pod 'SDWebImage'
-
-pod 'GrowingTextView', '~> 0.5'
-
-#---------------------------------------------
-# SideMenu
-#pod 'SlideMenuControllerSwift'
-
-
-# amazon S3 bucket
-#pod 'AWSS3'
-#pod 'AWSS3', '~> 2.6.13'            # For file transfers
-
-
-# MultipleimagePicker
-#pod 'OpalImagePicker'
-
-# Popover
-#pod "Popover"
-
-#crashlytics
-#pod 'Fabric'
-#pod 'Crashlytics'
-
+  
+  pod 'SwiftLint'
+  
+  
+  # keyboard handling
+  pod 'IQKeyboardManagerSwift'
+  
+  # loader
+  pod 'SVProgressHUD'
+  
+  # Internet checking
+  pod 'ReachabilitySwift'
+  
+  # floating lables in textfield
+  pod 'SkyFloatingLabelTextField'
+  
+  # photo viewer
+  pod 'SKPhotoBrowser'
+  
+  # lazy loading of images
+  pod 'SDWebImage'
+  
+  pod 'GrowingTextView', '~> 0.5'
+  
+  # Popover
+  pod "Popover"
+  
+  # Country code picker
+  pod 'MRCountryPicker'
+  
+  #---------------------------------------------
+  # SideMenu
+  #pod 'SlideMenuControllerSwift'
+  
+  
+  # amazon S3 bucket
+  #pod 'AWSS3'
+  #pod 'AWSS3', '~> 2.6.13'            # For file transfers
+  
+  
+  # MultipleimagePicker
+  #pod 'OpalImagePicker'
+  
+  # Popover
+  #pod "Popover"
+  
+  #crashlytics
+  #pod 'Fabric'
+  #pod 'Crashlytics'
+  
 end

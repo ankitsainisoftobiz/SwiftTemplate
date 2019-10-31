@@ -53,7 +53,7 @@ class CBGroupChatVC: ASBaseVC {
             self.navigationItem.hidesBackButton = true
         }
         
-        self.navigationController?.navigationBar.setColors(background: UIColor.fbColor, text: .white)
+        self.navigationController?.navigationBar.setColors(background: Color.fbColor, text: .white)
         navBarButtons(left: #imageLiteral(resourceName: "back_arrow"), right: nil, shouldBack: false)
         
         btnLeftMenu.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)

@@ -10,6 +10,7 @@ disabled_rules: # rule identifiers to exclude from running
 - cyclomatic_complexity
 - file_length
 - shorthand_operator
+- valid_ibinspectable
 
 #- trailing_semicolon
 #- colon
@@ -40,7 +41,7 @@ opt_in_rules: # some rules are only opt-in
 excluded: # paths to ignore during linting. Takes precedence over `included`.
 - Pods
 - SwiftProject/Resources/Assets
-- SwiftProject/Common/Extensions/UserDefaults/SwiftyUserDefaults.swift
+- SwiftProject/Common/Extensions/DateTime/DateHelper.swift
 
 # Overrided rules >>>.
 empty_count: warning

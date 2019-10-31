@@ -1,13 +1,14 @@
 //
 //  ASFileManager.swift
-//  Ankit_Saini
+//  Dojo
 //
-//  Created by softobiz on 12/22/17.
-//  Copyright © 2017 Ankit_Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
 import Foundation
 
+// MARK: - FileManager
 extension FileManager {
     
     // MARK: - Variables
@@ -19,7 +20,10 @@ extension FileManager {
     /// - documents: Documents path.
     /// - cache: Cache path.
     public enum PathType: Int {
+        /// Document Directory
         case documents
+        
+        /// Temprary Directory
         case temprary
     }
     
@@ -88,19 +92,23 @@ extension FileManager {
     
 }
 
-
+// MARK: - Common Directories
 extension FileManager {
     
-    // MARK: - Common Directories
+    /// Temporary Directory Path
     static var temporaryDirectoryPath: String {
         return NSTemporaryDirectory()
     }
     
+    /// Temporary Directory URL
     static var temporaryDirectoryURL: URL {
         return URL(fileURLWithPath: FileManager.temporaryDirectoryPath, isDirectory: true)
     }
     
     // MARK: - File System Modification
+    
+    /// Create Directory
+    /// - Parameter path: String
     @discardableResult
     static func createDirectory(atPath path: String) -> Bool {
         do {
@@ -111,11 +119,15 @@ extension FileManager {
         }
     }
     
+    /// Create Directory
+    /// - Parameter url: URL
     @discardableResult
     static func createDirectory(at url: URL) -> Bool {
         return createDirectory(atPath: url.path)
     }
     
+    /// Remove Item
+    /// - Parameter path: String
     @discardableResult
     static func removeItem(atPath path: String) -> Bool {
         do {
@@ -126,11 +138,15 @@ extension FileManager {
         }
     }
     
+    /// Remove Item
+    /// - Parameter url: URL
     @discardableResult
     static func removeItem(at url: URL) -> Bool {
         return removeItem(atPath: url.path)
     }
     
+    /// Remove All Items Inside Directory
+    /// - Parameter path: String
     @discardableResult
     static func removeAllItemsInsideDirectory(atPath path: String) -> Bool {
         let enumerator = FileManager.default.enumerator(atPath: path)
@@ -144,6 +160,8 @@ extension FileManager {
         return result
     }
     
+    /// Remove All Items Inside Directory
+    /// - Parameter url: URL
     @discardableResult
     static func removeAllItemsInsideDirectory(at url: URL) -> Bool {
         return removeAllItemsInsideDirectory(atPath: url.path)

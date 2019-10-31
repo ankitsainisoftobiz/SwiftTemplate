@@ -17,16 +17,14 @@ class UserLogin {
         }
         
         BackgroundQueue.loginQueue.async {
-            let response = ASDataModal.shared.requestGetDataApi(with: API.login.strUrl(), parameters: parameters)
-            print(response.validatedData)
-            completion(response.isSuccess)
+            ASDataModal.shared.requestGetDataApi(with: API.login.strUrl(), parameters: parameters) { (user: Person?, _) in
+                print(user.debugDescription)
+                completion(true)
+            }
         }
     }
     
     static func pollUserUpdates(with parameters: Dictionary<String, Any>, controller: UIViewController? = nil, completion: @escaping (_ isSuccess: Bool) -> Void) {
         
-        let response = ASDataModal.shared.requestGetDataApi(with: API.polling.strUrl(), parameters: parameters)
-        print(response.validatedData)
-        completion(response.isSuccess)
     }
 }

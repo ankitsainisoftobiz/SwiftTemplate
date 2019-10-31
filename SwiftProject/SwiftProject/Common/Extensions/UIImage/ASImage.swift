@@ -1,43 +1,23 @@
 //
 //  ASImage.swift
-//  LowRateInsuranceAgency
+//  Dojo
 //
-//  Created by softobiz on 12/14/17.
-//  Copyright © 2017 Ankit_Saini. All rights reserved.
+//  Created by Ankit Saini on 21/10/19.
+//  Copyright © 2019 softobiz. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import ImageIO
 
-@IBDesignable class ASImageView: UIImageView {
-    
-    @IBInspectable var borderWidth: CGFloat = 0.0 {
-        didSet {
-            if borderWidth > 0 {
-                layer.borderWidth = borderWidth
-            }
-        }
-    }
-    
-    @IBInspectable var borderColor: UIColor = UIColor.clear {
-        didSet {
-            layer.borderColor = borderColor.cgColor
-        }
-    }
-    
-    @IBInspectable var cornerRadius: CGFloat = 0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-            layer.masksToBounds = true
-        }
-    }
-}
 //
 //MARK:- Imageview Gif Extension
 //
 extension UIImageView {
     
+    /// Load the gif image
+    ///
+    /// - Parameter name: name of the image from local bundle
     public func loadGif(name: String) {
         DispatchQueue.global().async {
             let image = UIImage.gif(name: name)
@@ -47,6 +27,9 @@ extension UIImageView {
         }
     }
     
+    /// Download image from a url.
+    ///
+    /// - Parameter urlString: url of the image.
     public func imageFromServerURL(urlString: String) {
         
         URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, _, error) -> Void in
@@ -70,6 +53,8 @@ extension UIImageView {
 //
 extension UIImage {
     
+    /// Gif image data
+    /// - Parameter data: Data
     public class func gif(data: Data) -> UIImage? {
         // Create source from data
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
@@ -80,6 +65,8 @@ extension UIImage {
         return UIImage.animatedImageWithSource(source)
     }
     
+    /// Gif image url
+    /// - Parameter url: String
     public class func gif(url: String) -> UIImage? {
         // Validate URL
         guard let bundleURL = URL(string: url) else {
@@ -96,6 +83,8 @@ extension UIImage {
         return gif(data: imageData)
     }
     
+    /// Gif image name
+    /// - Parameter name: String
     public class func gif(name: String) -> UIImage? {
         // Check for existance of gif
         guard let bundleURL = Bundle.main
@@ -113,6 +102,9 @@ extension UIImage {
         return gif(data: imageData)
     }
     
+    /// Delay For Image At Index
+    /// - Parameter index: Int
+    /// - Parameter source: CGImageSource
     internal class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         
@@ -144,6 +136,9 @@ extension UIImage {
         return delay
     }
     
+    /// GCD For Pair
+    /// - Parameter a: Int?
+    /// - Parameter b: Int?
     internal class func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
         var a = a
         var b = b
@@ -179,6 +174,8 @@ extension UIImage {
         }
     }
     
+    /// GCD Array
+    /// - Parameter array: Array<Int>
     internal class func gcdForArray(_ array: Array<Int>) -> Int {
         if array.isEmpty {
             return 1
@@ -193,6 +190,8 @@ extension UIImage {
         return gcd
     }
     
+    /// Animate image with source
+    /// - Parameter source: CGImageSource
     internal class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
@@ -248,24 +247,17 @@ extension UIImage {
 // MARK:-
 // MARK: Save and delete image in Local Storage
 // MARK:
-
-/**
- * @Author : Ankit Saini on 22/12/2017 v1.0
- *
- * Function name: showLoaderWith & hideLoader
- *
- * @description:  This function is used to show the spinning loader on view and hide the loader from the view.
- *
- * @param : title: String = "" => This will be written under the loader,
- *          interaction: Bool = true => This will disable the user interaction to app if true.
- */
 extension UIImage {
-    func saveImage(ext: MediaExtension, percent: CGFloat = 0.4) -> (Bool, String, String, Int) {
+    
+    /// Save image to document directory
+    /// - Parameter ext: MediaExtension
+    /// - Parameter percent: CGFloat
+    func saveImage(ext: MediaExtension, percent: CGFloat = 0.4) -> (isSaved: Bool, filePath: String, fileName: String, size: Int) {
         
         //FileName in string
         //
-        let date = Date().toString(format: .custom("yyyy-MM-dd'T'HH:mm:ss.SSS"))
-        let fileName = String.randomString(len: 10).appending(date).with(ext: ext)
+        let date = Date().toString(format: .custom("yyyyMMddHHmmss_SSS"))
+        let fileName = String(format: "IMAGE_IOS_%@%@", String.randomString(len: 10), date).with(ext: ext)
         //
         //File Data in bytes
         //
@@ -286,6 +278,8 @@ extension UIImage {
         return (false, "", "", size)
     }
     
+    /// Compress image
+    /// - Parameter percent: CGFloat
     func compressImage(percent: CGFloat) -> Data? {
         
         var actualHeight: CGFloat = self.size.height
@@ -327,6 +321,8 @@ extension UIImage {
         return imageData
     }
     
+    /// Decrease length size of image
+    /// - Parameter percent: CGFloat
     func decreaseSize(percent: CGFloat = 0.6) -> UIImage {
         let data = self.jpegData(compressionQuality: percent)
         if data != nil {
@@ -336,6 +332,7 @@ extension UIImage {
         return self
     }
     
+    /// Length of image in bytes
     func length() -> Int {
         let data = self.jpegData(compressionQuality: 1.0)
         if data != nil {
@@ -344,6 +341,8 @@ extension UIImage {
         return 0
     }
     
+    /// Resize image
+    /// - Parameter newWidth: CGFloat
     func resize(withWidth newWidth: CGFloat) -> UIImage? {
         
         let scale = newWidth / self.size.width
@@ -360,6 +359,8 @@ extension UIImage {
 //MARK:- Orientation Fix
 
 extension UIImage {
+    
+    /// Fix Captured Image orientation
     func fixedOrientation() -> UIImage? {
         
         guard imageOrientation != UIImage.Orientation.up else {
@@ -425,11 +426,18 @@ extension UIImage {
 //MARK:-
 //MARK: Save Image to Gallery
 extension UIImage {
+    
+    /// Save Image to gallery
     func saveInGallery() {
         UIImageWriteToSavedPhotosAlbum(self, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     //MARK: - Add image to Library
+    
+    /// Save image in gallery
+    /// - Parameter image: UIImage
+    /// - Parameter error: Error
+    /// - Parameter contextInfo: UnsafeRawPointer
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             // we got back an error!
@@ -444,6 +452,7 @@ extension UIImage {
         return withRenderingMode(.alwaysTemplate)
     }
     
+    /// Render type original
     public var original: UIImage {
         return withRenderingMode(.alwaysOriginal)
     }

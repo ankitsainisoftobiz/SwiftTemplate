@@ -153,7 +153,7 @@ extension CBGroupChatVC: UITableViewDataSource {
         lblDateSection1.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
         lblDateSection1.textAlignment = .center
         lblDateSection1.textColor = .black
-        lblDateSection1.backgroundColor = .chatSection
+        lblDateSection1.backgroundColor = Color.lightText.value
         
         let date = arrDateMessages[section].msgDate
         let orizinalDate = Date.init(fromString: date, format: .custom("yyyy-MM-dd"))

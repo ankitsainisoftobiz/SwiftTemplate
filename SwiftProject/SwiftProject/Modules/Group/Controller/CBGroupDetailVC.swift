@@ -37,7 +37,7 @@ class CBGroupDetailVC: ASBaseVC {
             self.navigationItem.title = "Group Details"
         }
         
-        self.navigationController?.navigationBar.setColors(background: .fbColor, text: .white)
+        self.navigationController?.navigationBar.setColors(background: Color.fbColor, text: .white)
         navBarButtons(left: #imageLiteral(resourceName: "back_arrow"), right: nil, shouldBack: true)
         ///
         ///Setup UI
@@ -53,7 +53,7 @@ class CBGroupDetailVC: ASBaseVC {
         } else {
             btnAddNewUser.isHidden = false
             lblParticipantCount.text = "0 Participants"
-            lblParticipantCount.textColor = .fbColor
+            lblParticipantCount.textColor = Color.fbColor
         }
     }
     //MARK:- ACTION

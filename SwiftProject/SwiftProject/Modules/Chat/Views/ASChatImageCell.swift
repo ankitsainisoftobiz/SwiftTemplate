@@ -61,7 +61,7 @@ class ASChatImageCell: UITableViewCell {
         if isSender == true { //sender
             baseViewLeadingConstraint?.constant = Screen.width - (baseViewWidthConstraint?.constant ?? 217) - 8
             
-            uvBaseView?.backgroundColor = .fbColor
+            uvBaseView?.backgroundColor = Color.fbColor
             lblName?.textColor = .white
             lblMsg?.textColor = .white
             lblTime?.textColor = .white

@@ -18,7 +18,7 @@ class CBMessageListVC: ASBaseVC {
         ///Nav Bar
         ///
         self.navigationItem.title = "Messages"
-        self.navigationController?.navigationBar.setColors(background: .fbColor, text: .white)
+        self.navigationController?.navigationBar.setColors(background: Color.fbColor, text: .white)
     }
     
     @IBAction func actNewChat(_ sender: UIButton) {

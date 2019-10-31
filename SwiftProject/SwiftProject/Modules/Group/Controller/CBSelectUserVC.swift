@@ -32,7 +32,7 @@ class CBSelectUserVC: ASBaseVC {
         super.viewDidLoad()
 
         self.navigationItem.title = "Add Participant"
-        self.navigationController?.navigationBar.setColors(background: .fbColor, text: .white)
+        self.navigationController?.navigationBar.setColors(background: Color.fbColor, text: .white)
         navBarButtons(left: #imageLiteral(resourceName: "back_arrow"), right: nil, shouldBack: true)
         btnRightMenu.setTitle("Next >", for: .normal)
         

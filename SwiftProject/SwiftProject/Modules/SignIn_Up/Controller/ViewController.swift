@@ -21,7 +21,7 @@ class ViewController: ASBaseVC {
         ///1
 //        navBar(withTitle: "Home", color: .black)
 //        navBarButtons(left: #imageLiteral(resourceName: "nav_back"), right: #imageLiteral(resourceName: "nav_back"), shouldBack: false)
-        self.navigationController?.navigationBar.setColors(background: UIColor.fbColor, text: UIColor.white)
+        self.navigationController?.navigationBar.setColors(background: Color.fbColor, text: UIColor.white)
         
         ///2
 //        _ = Storyboard.main.instance.instantiateViewController(withIdentifier: ViewController.storyboardID)
@@ -95,41 +95,37 @@ class ViewController: ASBaseVC {
     //MARK:- Lazy Initializers
     
     func validation() -> Bool {
-        if txtUserName.text?.isEmpty == true {
-            txtUserName.errorMessage = "\(txtUserName.placeholder ?? "") \(L10n.isRequired.string)"
+        if txtUserName.textField.text?.isEmpty == true {
+            txtUserName.textField.errorMessage = "\(txtUserName.placeholder ?? "") \(L10n.isRequired.string)"
             return false
         }
-        if txtPassword.text?.isEmpty == true {
-            txtPassword.errorMessage = "\(txtPassword.placeholder ?? "") \(L10n.isRequired.string)"
+        if txtPassword.textField.text?.isEmpty == true {
+            txtPassword.textField.errorMessage = "\(txtPassword.placeholder ?? "") \(L10n.isRequired.string)"
             return false
         }
         return true
     }
     
-    lazy var txtUserName: FormTextField = {
-        let txtF = FormTextField.init(frame: fieldFrame)
-        txtF.setupFields(placeholder: "USERNAME", error: "", returnKey: .next)
-        txtF.formDelegate = self
-        txtF.keyboardType = .default
+    lazy var txtUserName: ASFormFieldView = {
+        let txtF = ASFormFieldView.init(frame: fieldFrame)
+        txtF.placeholder = "Username"
         return txtF
     }()
     
-    lazy var txtPassword: FormTextField = {
-        let txtF = FormTextField.init(frame: fieldFrame)
+    lazy var txtPassword: ASFormFieldView = {
+        let txtF = ASFormFieldView.init(frame: fieldFrame)
         txtF.frame.origin.y = txtUserName.frame.maxY + fieldMargin
-        txtF.setupFields(placeholder: "PASSWORD", error: "", returnKey: .done)
-        txtF.formDelegate = self
-        txtF.keyboardType = .default
+        txtF.placeholder = "Password"
         return txtF
     }()
     
-    lazy var btnSubmit: Button = {
-        let btn = Button.init(frame: CGRect.init(x: Screen.centerW-(170/2), y: txtPassword.frame.maxY + fieldMargin + 5, width: 170, height: self.fieldHeight-5))
+    lazy var btnSubmit: ASButton = {
+        let btn = ASButton.init(frame: CGRect.init(x: Screen.centerW-(170/2), y: txtPassword.frame.maxY + fieldMargin + 5, width: 170, height: self.fieldHeight-5))
         btn.setTitle("SUBMIT", for: .normal)
         btn.titleLabel?.font = Font.formButtons
         btn.cornerRadius = (self.fieldHeight-5)/2
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .blueButton
+        btn.backgroundColor = Color.darkBackground.value
         btn.showsTouchWhenHighlighted = true
         btn.addTarget(self, action: #selector(actSubmit(sender:)), for: .touchUpInside)
         return btn
@@ -141,25 +137,6 @@ class ViewController: ASBaseVC {
     lazy var fieldFrame: CGRect = {
         return CGRect.init(x: 25, y: fieldMargin, width: Screen.width-50, height: self.fieldHeight)
     }()
-}
-
-extension ViewController: FormTextFieldDelegate {
-    func formTextFieldResigned(returnKey: UIReturnKeyType) {
-        
-        if validation() == false {
-            return
-        }
-        
-        if returnKey == .done {
-            self.resignKeyboard()
-        } else {
-            self.gotoNextField()
-        }
-    }
-    override func responds(to aSelector: Selector!) -> Bool {
-        print(aSelector.description)
-        return super.responds(to: aSelector)
-    }
 }
 
 extension ViewController {
@@ -176,22 +153,5 @@ extension ViewController {
 
         }
         timer?.resume()
-        
-        
-//        let queue = BackgroundQueue.polingQueue // DispatchQueue.global(qos: .background)
-//        timer = DispatchSource.makeTimerSource(queue: queue)
-//        if timer != nil {
-//            timer!.schedule(deadline: .now(), repeating: .seconds(5))//.seconds(5), leeway: .seconds(1)
-//            timer!.setEventHandler(handler: {
-//                // Your code
-//                print("This is polling queue")
-//                autoreleasepool(invoking: {
-//                    UserLogin.pollUserUpdates(with: [:], controller: self, completion: { (isSuccess) in
-//                        print(isSuccess)
-//                    })
-//                })
-//            })
-//            timer!.resume()
-//        }
     }
 }
